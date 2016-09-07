@@ -1,0 +1,44 @@
+{
+  "_embedded": {
+    "users": [
+      {
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/api/users/1"
+          },
+          "user": {
+            "href": "http://localhost:8080/api/users/1"
+          }
+        },
+        "id": 1,
+        "username": "max"
+      },
+      {
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/api/users/2"
+          },
+          "user": {
+            "href": "http://localhost:8080/api/users/2"
+          }
+        },
+        "id": 2,
+        "username": "fax"
+      }
+    ]
+  },
+  "_links": {
+    "profile": {
+      "href": "http://localhost:8080/api/profile/users"
+    },
+    "self": {
+      "href": "http://localhost:8080/api/users"
+    }
+  },
+  "page": {
+    "number": 0,
+    "size": 20,
+    "totalElements": 2,
+    "totalPages": 1
+  }
+}

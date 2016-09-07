@@ -1,0 +1,63 @@
+buildscript {
+  repositories { jcenter() }
+  dependencies {
+    classpath "org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE"
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+jar {
+  baseName = 'angular2-spring-boot'
+  version = '0.0.1'
+}
+
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+
+repositories { jcenter() }
+
+dependencies {
+  compile 'org.springframework.boot:spring-boot-starter-data-rest',
+          'org.springframework.boot:spring-boot-starter-data-jpa',
+          'org.springframework.boot:spring-boot-starter-actuator',
+          'org.springframework.boot:spring-boot-starter-mustache',
+          'org.springframework.boot:spring-boot-starter-hateoas',
+          'org.springframework.boot:spring-boot-devtools',
+          'org.projectlombok:lombok'
+
+  runtime 'com.h2database:h2'
+
+  testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
+
+task ui(dependsOn: ['npmInstall', 'npmTest', 'npmBuild'])
+
+task npmInstall(type: Exec) {
+  workingDir './ui'
+  commandLine "npm", "i", "--no-optional"
+}
+
+task npmTest(type: Exec) {
+  workingDir './ui'
+  commandLine "npm", "run", "testUi"
+}
+
+task npmBuild(type: Exec) {
+  workingDir './ui'
+  commandLine "npm", "run", "build"
+}
+
+build.shouldRunAfter ui
+npmBuild.shouldRunAfter npmTest
+npmTest.shouldRunAfter npmInstall
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '3.0'
+}
+
+// bash build/libs/*.jar
+springBoot {
+  executable = true
+}

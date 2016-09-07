@@ -1,0 +1,15 @@
+ui*/node_modules
+**/dist
+src/main/resources/static
+out
+.idea
+build
+gradle
+classes
+.gradle
+gradlew*
+**/.idea
+**/*.log*
+**/*.ipr
+**/*.iml
+**/*.iws
