@@ -5,13 +5,10 @@
   "angular-cli": {},
   "scripts": {
     "ino": "npm i --no-optional",
-
     "ui:clean": "rimraf -rf '../src/main/resources/static'",
     "ui:build": "ng build --prod -o ../src/main/resources/static",
     "build": "npm-run-all ui:*",
-
     "not-worked-proxy": "ng serve --proxy config/proxy.json",
-
     "serve": "ng serve",
     "start": "ng build -w -o ../src/main/resources/static",
     "lint": "tslint \"src/**/*.ts\"",
@@ -52,5 +49,9 @@
     "ts-node": "1.2.1",
     "tslint": "3.13.0",
     "typescript": "^2.0.2"
-  }
+  },
+  "description": "angular2-spring-boot-ui",
+  "main": "karma.conf.js",
+  "keywords": [],
+  "author": "Maksim Kostromin <daggerok@gmail.com>"
 }

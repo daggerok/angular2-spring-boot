@@ -1,12 +1,18 @@
 buildscript {
   repositories { jcenter() }
   dependencies {
-    classpath "org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE"
+    classpath "org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE"
   }
 }
 
-apply plugin: 'java'
-apply plugin: 'idea'
+plugins {
+  id 'java'
+  id 'idea'
+  // gradle dependencyUpdates -Drevision=release
+  id 'com.github.ben-manes.versions' version '0.13.0'
+
+}
+
 apply plugin: 'spring-boot'
 
 jar {
@@ -25,7 +31,7 @@ dependencies {
           'org.springframework.boot:spring-boot-starter-mustache',
           'org.springframework.boot:spring-boot-starter-hateoas',
           'org.springframework.boot:spring-boot-devtools',
-          'org.projectlombok:lombok'
+          'org.projectlombok:lombok:1+'
 
   runtime 'com.h2database:h2'
 
