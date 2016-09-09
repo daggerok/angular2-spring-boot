@@ -5,7 +5,8 @@ import {
   async
 } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { HTTP_PROVIDERS } from '@angular/http';
+import { HttpModule } from '@angular/http';
+import { ApiService } from './shared/ApiService';
 
 describe('App: Ui', () => {
   let fixture = null;
@@ -13,10 +14,9 @@ describe('App: Ui', () => {
   beforeEach(() => {
 
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
-      providers: [HTTP_PROVIDERS]
+      declarations: [AppComponent],
+      imports: [HttpModule],
+      providers: [ApiService]
     });
 
     fixture = TestBed.createComponent(AppComponent);
@@ -24,14 +24,14 @@ describe('App: Ui', () => {
 
   it('should create the app', async(() => {
 
-    let app = fixture.debugElement.componentInstance;
+    const app = fixture.debugElement.componentInstance;
 
     expect(app).toBeTruthy();
   }));
 
   it(`should have as title 'app works!'`, async(() => {
 
-    let app = fixture.debugElement.componentInstance;
+    const app = fixture.debugElement.componentInstance;
 
     expect(app.title).toEqual('app works!');
   }));
@@ -40,7 +40,7 @@ describe('App: Ui', () => {
 
     fixture.detectChanges();
 
-    let compiled = fixture.debugElement.nativeElement;
+    const compiled = fixture.debugElement.nativeElement;
 
     expect(compiled.querySelector('h1').textContent).toContain('app works!');
   }));
