@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf()
                 .disable()
             .authorizeRequests()
-                .antMatchers("/vendors**").permitAll()
+                .antMatchers("/login*", "/vendors**").permitAll()
                 .antMatchers("/admin", "/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             .and()
@@ -53,7 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .permitAll()
             .and()
-                .exceptionHandling().accessDeniedPage("/login?denied");
+                .exceptionHandling()
+                .accessDeniedPage("/login?accessDenied");
         // @formatter:on
     }
 }
