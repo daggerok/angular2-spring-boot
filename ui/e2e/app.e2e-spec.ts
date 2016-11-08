@@ -1,14 +1,14 @@
-import { UiPage } from './app.po';
+import { CcPage } from './app.po';
 
-describe('ui App', function() {
-  let page: UiPage;
+describe('app cc-home h3', function() {
+  let page: CcPage;
 
   beforeEach(() => {
-    page = new UiPage();
+    page = new CcPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should display message saying "hi, cc!"', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getAppCcHomeH3Text()).toEqual('hi, cc!');
   });
 });

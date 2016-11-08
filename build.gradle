@@ -1,12 +1,26 @@
 buildscript {
-  repositories { jcenter() }
+  // https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-1.4-Release-Notes
+  // http://hibernate.org/search/documentation/migrate/5.0/
+  // https://github.com/hibernate/hibernate-orm/blob/5.0/migration-guide.adoc
+  ext['hibernate.version'] = '4.3.11.Final'
+  repositories {
+    jcenter()
+    mavenCentral()
+  }
   dependencies {
-    classpath "org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE"
+    dependencies { classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE' }
   }
 }
 
-apply plugin: 'java'
-apply plugin: 'idea'
+plugins {
+  id 'io.spring.dependency-management' version '0.6.1.RELEASE'
+  // gradle dependencyUpdates -Drevision=release
+  id 'com.github.ben-manes.versions' version '0.13.0'
+  id 'java'
+  id 'idea'
+  id 'eclipse'
+}
+
 apply plugin: 'spring-boot'
 
 jar {
@@ -16,48 +30,26 @@ jar {
 
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
-repositories { jcenter() }
+repositories {
+  jcenter()
+  mavenCentral()
+}
 
 dependencies {
-  compile 'org.springframework.boot:spring-boot-starter-data-rest',
-          'org.springframework.boot:spring-boot-starter-data-jpa',
-          'org.springframework.boot:spring-boot-starter-actuator',
+  compile 'org.springframework.boot:spring-boot-starter-security',
+          'org.springframework.security:spring-security-web:4.1.1.RELEASE',
           'org.springframework.boot:spring-boot-starter-mustache',
-          'org.springframework.boot:spring-boot-starter-hateoas',
+          'org.springframework.boot:spring-boot-starter-actuator',
           'org.springframework.boot:spring-boot-devtools',
           'org.projectlombok:lombok'
-
-  runtime 'com.h2database:h2'
 
   testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 
-task ui(dependsOn: ['npmInstall', 'npmTest', 'npmBuild'])
-
-task npmInstall(type: Exec) {
-  workingDir './ui'
-  commandLine "npm", "i", "--no-optional"
-}
-
-task npmTest(type: Exec) {
-  workingDir './ui'
-  commandLine "npm", "run", "testUi"
-}
-
-task npmBuild(type: Exec) {
-  workingDir './ui'
-  commandLine "npm", "run", "build"
-}
-
-build.shouldRunAfter ui
-npmBuild.shouldRunAfter npmTest
-npmTest.shouldRunAfter npmInstall
-
-task wrapper(type: Wrapper) {
-  gradleVersion = '3.0'
-}
-
-// bash build/libs/*.jar
+// build execulable jar: `bash build/libs/*.jar`
 springBoot {
   executable = true
+  mainClass = 'daggerok.Angular2SpringBootApplication'
 }
+
+build.shouldRunAfter ':ui:ui'

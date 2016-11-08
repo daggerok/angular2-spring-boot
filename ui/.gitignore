@@ -1,3 +1,4 @@
+/_test-output/
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
@@ -5,11 +6,15 @@
 /tmp
 
 # dependencies
+/etc
+/node
+npm.tar.gz
 /node_modules
 /bower_components
 
 # IDEs and editors
 /.idea
+/.vscode
 .project
 .classpath
 *.launch
@@ -18,16 +23,18 @@
 # misc
 /.sass-cache
 /connect.lock
-/coverage/**/*.*
-/libpeerconnection.log
-npm-debug.log
-testem.log
+/coverage
+npm-debug.log*
+*.log
 /typings
 
-# e2e
+# compile putput
 /e2e/*.js
 /e2e/*.map
+/src/*.js
+/src/*.map
 
 #System Files
 .DS_Store
 Thumbs.db
+

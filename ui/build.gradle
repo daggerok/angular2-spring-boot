@@ -1,0 +1,28 @@
+plugins{ id 'java' }
+
+def workDir = project.projectDir
+
+task 'npm install'(type: Exec) {
+  workingDir workDir
+  executable 'bash'
+  args '-c', 'npm i --no-optional'
+}
+
+[
+    // run
+    'npm start'      , 'npm stop' ,
+    // build
+    'npm run webpack', 'npm run build',
+    // test
+    'npm test'       , 'npm run e2e'  , 'npm run lint',
+].each { npmCommand ->
+  tasks.create(name: npmCommand, type: Exec, dependsOn: 'npm install') {
+    workingDir workDir
+    executable 'bash'
+    args '-c', npmCommand
+  }
+}
+
+// task alias for idea run configurations
+task ui(dependsOn: ['npm run build'])
+task 'ui-ci'(dependsOn: ['npm test', 'npm run e2e', 'npm run lint', 'npm run webpack'])

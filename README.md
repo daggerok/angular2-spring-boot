@@ -1,5 +1,12 @@
-angular2-spring-boot [![build](https://travis-ci.org/daggerok/angular2-spring-boot.svg?branch=master)](https://travis-ci.org/daggerok/angular2-spring-boot)
-====================
+# angular2-spring-security [![build](https://travis-ci.org/daggerok/angular2-spring-boot.svg?branch=angular2-spring-security)](https://travis-ci.org/daggerok/angular2-spring-boot)
+
+dev
+
+```fish
+gradle bootRun
+gradle 'npm start'
+```
+
 
 build
 
@@ -7,22 +14,9 @@ build
 gradle ui build bootRun
 ```
 
+run
+
 ```fish
 gradle clean npmInstall npmTest npmBuild build
 bash build/libs/*.jar
-```
-
-backend development
-
-```fish
-gradle bootRun
-```
-
-ui development
-
-```fish
-cd ui/
-npm start
-npm run build
-npm run serve
 ```

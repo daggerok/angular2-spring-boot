@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <base href="/">
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>angular2-spring-security</title>
+  <!--
+    CSRF:
+    default header name is 'X-CSRF-TOKEN'
+    default cookie name is 'XSRF-TOKEN'
+  -->
+  <meta name="_csrf" content="${_csrf.token}"/>
+  <meta name="_csrf_header" content="${_csrf.headerName}"/>
+  <style>
+    /*!
+     * IE10 viewport hack for Surface/desktop Windows 8 bug
+     * Copyright 2014-2015 Twitter, Inc.
+     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+     */
+
+    /*
+     * See the Getting Started docs for more information:
+     * http://getbootstrap.com/getting-started/#support-ie10-width
+     */
+    @-ms-viewport {
+      width: device-width;
+    }
+
+    @-o-viewport {
+      width: device-width;
+    }
+
+    @viewport {
+      width: device-width;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <form class="form-signin col-xs-4" name="loginForm" action="/login" method="post">
+    <h2 class="form-signin-heading">Sign in, please</h2>
+    <label for="username" class="sr-only">Username</label>
+    <input type="text" class="form-control" id="username" name="username" placeholder="username" required autofocus>
+    <label for="password" class="sr-only">Password</label>
+    <input type="password" class="form-control" id="password" name="password" placeholder="password">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  </form>
+</div>
+</body>
+</html>
