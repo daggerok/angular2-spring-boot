@@ -1,3 +1,5 @@
 dependencies {
-  compile project(":api").sourceSets.main.output
+  compile project(":api"),
+      project(":api").sourceSets.main.output,
+      'org.springframework.boot:spring-boot-starter-data-mongodb'
 }

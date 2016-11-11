@@ -1,4 +1,11 @@
 server.port: 0
 spring:
   application.name: producer
-  cloud.stream.bindings.output.destination: messages
+  cloud.stream.bindings.output:
+    destination: user
+    # use this option for writing with fallback
+    group: user-consumer
+  rabbitmq:
+    username: admin
+    password: admin
+fixedDelay: 500000

@@ -1,4 +1,4 @@
-package daggerok.api.message;
+package daggerok.api.domain;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;

@@ -1,5 +1,5 @@
-spring-cloud-stream [![build](https://travis-ci.org/daggerok/spring-cloud-stream.svg?branch=master)](https://travis-ci.org/daggerok/spring-cloud-stream)
-====================
+spring-cloud-stream [![build](https://travis-ci.org/daggerok/spring-cloud-stream.svg?branch=stream-app)](https://travis-ci.org/daggerok/spring-cloud-stream)
+===================
 
 using rabbit
 
