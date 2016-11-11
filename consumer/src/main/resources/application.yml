@@ -1,0 +1,4 @@
+server.port: 0
+spring:
+  application.name: consumer
+  cloud.stream.bindings.input.destination: messages

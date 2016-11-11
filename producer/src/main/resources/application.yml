@@ -1,0 +1,4 @@
+server.port: 0
+spring:
+  application.name: producer
+  cloud.stream.bindings.output.destination: messages
