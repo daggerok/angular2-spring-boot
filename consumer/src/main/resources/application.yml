@@ -1,10 +1,10 @@
 server.port: 0
 spring:
   application.name: consumer
-  cloud.stream.bindings.input:
+  cloud.stream.bindings.userInputChannel:
     destination: user
-    # use this option for writing with fallback
-    group: user-consumer
+    # use group option for writing with fallback
+    group: durable-user
   rabbitmq:
     username: admin
     password: admin

@@ -1,6 +1,6 @@
 package daggerok.user;
 
-import daggerok.api.domain.Channel;
+import daggerok.user.message.Channel;
 import daggerok.api.domain.User;
 import daggerok.user.writer.UserWriter;
 import lombok.RequiredArgsConstructor;
@@ -14,13 +14,12 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 @EnableBinding(Channel.class)
 public class CreateOrUpdateUserCommandReceiver {
 
-    final Channel channel;
     final UserWriter userWriter;
 
-    @StreamListener(Channel.INPUT)
+    // @StreamListener("input-user-channel") // wrong should be userInputChannel
+    @StreamListener("userInputChannel")
     public void onCreateOrUpdate(final User user) {
         val createdUser = userWriter.save(user);
         log.info("user: {} saved.", createdUser);
     }
 }
-

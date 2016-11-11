@@ -1,7 +1,7 @@
 package daggerok.user;
 
-import daggerok.api.domain.Channel;
 import daggerok.api.domain.User;
+import daggerok.user.message.Channel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -26,17 +26,16 @@ public class CreateOrUpdateUserCommandSender {
     // @Bean
     public User defaultUser() {
         return new User()
-                .setRole("USER-" + LocalDateTime.now()
-                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
-                .setUsername("user-" + LocalDateTime.now()
-                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:s")))
-                .setPassword("password-" + LocalDateTime.now()
-                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:S")));
+                .setRole("USER-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                .setUsername("user-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:s")))
+                .setPassword(
+                        "password-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:S")));
     }
 
     @Bean
     @InboundChannelAdapter(
-            value = Channel.OUTPUT,
+            // value = "user-output-channel", // wrong, should be a bean name
+            value = "userOutputChannel",
             // poller = @Poller(fixedDelay = "500000", maxMessagesPerPoll = "2"))
             poller = @Poller(fixedDelay = "${fixedDelay}", maxMessagesPerPoll = "1"))
     public MessageSource<User> onCreateOrUpdate() {
