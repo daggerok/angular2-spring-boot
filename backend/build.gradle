@@ -1,0 +1,38 @@
+buildscript {
+  // https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-1.4-Release-Notes
+  // http://hibernate.org/search/documentation/migrate/5.0/
+  // https://github.com/hibernate/hibernate-orm/blob/5.0/migration-guide.adoc
+  ext['hibernate.version'] = '4.3.11.Final'
+  repositories {
+    jcenter()
+    mavenCentral()
+  }
+  dependencies {
+    dependencies { classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE' }
+  }
+}
+
+plugins {
+  id 'io.spring.dependency-management' version '0.6.1.RELEASE'
+  id 'com.github.ben-manes.versions' version '0.13.0'
+}
+
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+  compile 'org.springframework.boot:spring-boot-starter-security',
+      "org.springframework.security:spring-security-web:$springSecurityVersion",
+      'org.springframework.boot:spring-boot-starter-mustache',
+      'org.springframework.boot:spring-boot-starter-actuator',
+      'org.springframework.boot:spring-boot-devtools'
+
+  testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
+
+// build execulable jar: `bash build/libs/*.jar`
+springBoot {
+  executable = true
+  mainClass = 'daggerok.Angular2SpringBootApplication'
+}
+
+build.shouldRunAfter ':ui:ui'

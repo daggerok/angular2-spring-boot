@@ -1,4 +1,4 @@
-# angular2-spring-security [![build](https://travis-ci.org/daggerok/angular2-spring-boot.svg?branch=angular2-spring-security)](https://travis-ci.org/daggerok/angular2-spring-boot)
+# custom-security [![build](https://travis-ci.org/daggerok/angular2-spring-boot.svg?branch=custom-security)](https://travis-ci.org/daggerok/angular2-spring-boot)
 
 dev
 
@@ -11,7 +11,8 @@ gradle 'npm start'
 build
 
 ```fish
-gradle ui build bootRun
+gradle ui build
+gradle --parallel bootRun
 ```
 
 run

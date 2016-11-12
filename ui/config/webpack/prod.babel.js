@@ -1,25 +1,23 @@
-import webpack from 'webpack';
-import config from './commons/config.babel';
+import {
+  optimize,
+  DefinePlugin
+} from "webpack";
 
-const vendors = 'vendors';
+import config from "./commons/config.babel";
 
 config.devtool = false;
 config.output.sourceMapFilename = 'maps/[file].map';
 
 config.plugins = [
   ...config.plugins,
-  new webpack.optimize.CommonsChunkPlugin(
-    /* chunkName= */ vendors,
-    /* filename= */ `${vendors}.js`
-  ),
-  new webpack.optimize.DedupePlugin(),
-  new webpack.optimize.UglifyJsPlugin({
+  new optimize.DedupePlugin(),
+  new optimize.UglifyJsPlugin({
     mangle: {
       // https://github.com/angular/angular/issues/10618
       keep_fnames: true
     }
   }),
-  new webpack.DefinePlugin({
+  new DefinePlugin({
     'process.env': {
       'ENV_NODE': JSON.stringify('production')
     }

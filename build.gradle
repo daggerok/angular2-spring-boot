@@ -1,55 +1,21 @@
-buildscript {
-  // https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-1.4-Release-Notes
-  // http://hibernate.org/search/documentation/migrate/5.0/
-  // https://github.com/hibernate/hibernate-orm/blob/5.0/migration-guide.adoc
-  ext['hibernate.version'] = '4.3.11.Final'
-  repositories {
-    jcenter()
-    mavenCentral()
-  }
-  dependencies {
-    dependencies { classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE' }
-  }
-}
-
 plugins {
-  id 'io.spring.dependency-management' version '0.6.1.RELEASE'
-  // gradle dependencyUpdates -Drevision=release
-  id 'com.github.ben-manes.versions' version '0.13.0'
-  id 'java'
   id 'idea'
   id 'eclipse'
 }
 
-apply plugin: 'spring-boot'
+version = '0.0.1'
 
-jar {
-  baseName = 'angular2-spring-boot'
-  version = '0.0.1'
+subprojects {
+  ext {
+    lombokVersion = '1.16.10'
+    springSecurityVersion = '4.2.0.RELEASE'
+  }
+
+  apply plugin: 'java'
+
+  jar { version = '0.0.1' }
+  targetCompatibility = sourceCompatibility = JavaVersion.VERSION_1_8
+
+  repositories { mavenCentral() }
+  dependencies { compileOnly "org.projectlombok:lombok:$lombokVersion" }
 }
-
-sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
-
-repositories {
-  jcenter()
-  mavenCentral()
-}
-
-dependencies {
-  compile 'org.springframework.boot:spring-boot-starter-security',
-          'org.springframework.security:spring-security-web:4.1.1.RELEASE',
-          'org.springframework.boot:spring-boot-starter-mustache',
-          'org.springframework.boot:spring-boot-starter-actuator',
-          'org.springframework.boot:spring-boot-devtools',
-          'org.projectlombok:lombok'
-
-  testCompile 'org.springframework.boot:spring-boot-starter-test'
-}
-
-// build execulable jar: `bash build/libs/*.jar`
-springBoot {
-  executable = true
-  mainClass = 'daggerok.Angular2SpringBootApplication'
-}
-
-build.shouldRunAfter ':ui:ui'

@@ -22,7 +22,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="angular2-spring-boot" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

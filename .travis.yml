@@ -13,7 +13,7 @@ before_install:
 language: java
 jdk: oraclejdk8
 script:
-  - gradle ui-ci build ui
+  - gradle ci build ui
   - cat ui/*.log | true
 cache.directories:
   - ui/node/

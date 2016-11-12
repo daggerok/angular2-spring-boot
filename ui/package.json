@@ -12,7 +12,7 @@
 
     "sleep": "sleep 3",
 
-    "clean": "rimraf -rf ../target/classes/static",
+    "clean": "rimraf -rf ../backend/src/main/resources/static",
     "prebuild": "npm run clean",
     "predev": "npm run clean",
 

@@ -20,11 +20,12 @@ const localhost8080proxyApi = httpProxyMiddleware('/api', {
 
 // fallback for react-routes
 const historyApiFallback = require('connect-history-api-fallback');
+const outputPath = '../backend/src/main/resources/static';
 
 module.exports = {
   server: {
     always: 'index.html',
-    baseDir: '../src/main/resources/static',
+    baseDir: outputPath,
     // see ./webpack/webpack-dev-server.config.babel.js
     middleware: [
       // proxy
@@ -36,12 +37,12 @@ module.exports = {
     ],
   },
   files: [
-    '../../target/classes/static/index.html',
-    '../../target/classes/static/**/*.*'
+    outputPath + '/index.html',
+    outputPath + '/**/*.*'
   ],
   startPath: '/',
   serveStatic: [
-    '../../target/classes/static'
+    outputPath
   ],
 
   /**

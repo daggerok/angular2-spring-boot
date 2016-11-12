@@ -1,5 +1,9 @@
+import {
+    optimize,
+    NoErrorsPlugin,
+    ProvidePlugin
+} from 'webpack';
 import path from 'path';
-import webpack from 'webpack';
 import cssnano from 'cssnano';
 import autoprefixer from 'autoprefixer';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -15,6 +19,9 @@ const assets = /\.(raw|gif|png|jpg|jpeg|otf|eot|woff|woff2|ttf|svg|ico)$/;
 const resolve = (rel) => path.resolve(process.cwd(), rel);
 const resources = resolve('./src/resources');
 const include = resolve('./src');
+const vendors = 'vendors';
+
+export const outputPath = '../backend/src/main/resources/static';
 
 export default {
   entry: {
@@ -25,7 +32,7 @@ export default {
     app: './src/main.ts',
   },
   output: {
-    path: '../src/main/resources/static',
+    path: outputPath,
     filename: '[name].js',
   },
   module: {
@@ -108,9 +115,13 @@ export default {
   },
   plugins: [
     extractCSS,
-    new webpack.NoErrorsPlugin(),
+    new optimize.CommonsChunkPlugin(
+        /* chunkName= */ vendors,
+        /* filename= */ `${vendors}.js`
+    ),
+    new NoErrorsPlugin(),
     new ForkCheckerPlugin(),
-    new webpack.ProvidePlugin({
+    new ProvidePlugin({
       jQuery: 'jquery',
       $: 'jquery',
       jquery: 'jquery'
