@@ -1,0 +1,15 @@
+angular2_spring_boot_mongo:
+  container_name: angular2_spring_boot_mongo
+  image: mongo
+  ports:
+    - "27017:27017"
+# http://0.0.0.0:8081
+mangular2_spring_boot_mongo_express:
+  container_name: angular2_spring_boot_mongo_express
+  image: mongo-express
+  ports:
+    - "8081:8081"
+  links:
+    - angular2_spring_boot_mongo
+  environment:
+    ME_CONFIG_MONGODB_SERVER: angular2_spring_boot_mongo

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>index</title>
+  <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+</head>
+<body class="container-fluid">
+{{#principal}}
+  {{.}}
+{{/principal}}
+{{^principal}}
+  <a href="/login">login</a>
+  <a href="/logout">logout</a>
+{{/principal}}
+</body>
+</html>

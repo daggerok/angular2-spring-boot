@@ -1,19 +1,44 @@
 plugins {
   id 'idea'
   id 'eclipse'
+  id 'com.github.ben-manes.versions' version '0.13.0'
 }
 
-version = '0.0.1'
+allprojects {
+  version = '0.0.1'
+}
 
 subprojects {
-  ext {
-    lombokVersion = '1.16.10'
-    springSecurityVersion = '4.2.0.RELEASE'
+  buildscript {
+    // https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-1.4-Release-Notes
+    // http://hibernate.org/search/documentation/migrate/5.0/
+    // https://github.com/hibernate/hibernate-orm/blob/5.0/migration-guide.adoc
+    ext['hibernate.version'] = '4.3.11.Final'
+    ext {
+      webjarsVersion = '0.32'
+      lombokVersion = '1.16.10'
+      bootstrapVersion = '3.3.7-1'
+      jaksonAnnotationsVersion = '2.8.4'
+      springBootVersion = '1.4.2.RELEASE'
+      springSecurityVersion = '4.2.0.RELEASE'
+      dependencyManagementPluginVersion = '0.6.1.RELEASE'
+    }
+
+    repositories {
+      jcenter()
+      mavenCentral()
+      maven { url "http://repo.spring.io/snapshot" }
+      maven { url "http://repo.spring.io/milestone" }
+    }
+
+    dependencies {
+      classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion",
+          "io.spring.gradle:dependency-management-plugin:$dependencyManagementPluginVersion"
+    }
   }
 
   apply plugin: 'java'
-
-  jar { version = '0.0.1' }
+  // jar { version = "$version" }
   targetCompatibility = sourceCompatibility = JavaVersion.VERSION_1_8
 
   repositories { mavenCentral() }

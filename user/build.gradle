@@ -1,0 +1,8 @@
+apply plugin: 'io.spring.dependency-management'
+
+dependencies {
+  compile "org.springframework.boot:spring-boot-starter-data-mongodb:$springBootVersion",
+      "org.springframework.security:spring-security-crypto:$springSecurityVersion",
+      "org.springframework.security:spring-security-core:$springSecurityVersion",
+      "com.fasterxml.jackson.core:jackson-annotations:$jaksonAnnotationsVersion"
+}

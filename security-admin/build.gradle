@@ -1,17 +1,19 @@
-buildscript {
-  ext { springBootVersion = '1.4.2.RELEASE' }
-  repositories { mavenCentral() }
-  dependencies { classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}" }
-}
-
+/*plugins {
+  id 'io.spring.dependency-management' version '0.6.1.RELEASE'
+}*/
+apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.springframework.boot'
 
 dependencies {
-  compile 'org.springframework.boot:spring-boot-starter-actuator',
-      'org.springframework.boot:spring-boot-starter-data-mongodb',
+  compile project(':user'),
+      "org.springframework.security:spring-security-web:$springSecurityVersion",
+      'org.springframework.boot:spring-boot-starter-actuator',
       'org.springframework.boot:spring-boot-starter-mustache',
       'org.springframework.boot:spring-boot-starter-security',
-      'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+      "org.webjars:webjars-locator:$webjarsVersion",
+      "org.webjars:bootstrap:$bootstrapVersion"
   runtime 'org.springframework.boot:spring-boot-devtools'
   testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
+
+springBoot { executable = true }
