@@ -1,8 +1,22 @@
 sudo: required
 dist: trusty
+language: java
+jdk: oraclejdk8
 install: true
+env:
+  DOCKER_COMPOSE_VERSION: 1.4.2
 before_install:
+  - echo "install docker-compose"
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - docker-compose up -d
+
+  - echo "install node"
   - nvm install 7
+
+  - echo "install chrome"
   - export CHROME_BIN=/usr/bin/google-chrome
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
@@ -10,11 +24,11 @@ before_install:
   - sudo apt-get install -y libappindicator1 fonts-liberation
   - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   - sudo dpkg -i google-chrome*.deb
-language: java
-jdk: oraclejdk8
+before_script: docker-compose up -d
 script:
-  - gradle ci build ui
+  - gradle ui-ci build ui
   - cat ui/*.log | true
+after_script: docker-compose down
 cache.directories:
   - ui/node/
   - ui/node_modules/

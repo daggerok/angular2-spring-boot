@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>security admin</title>
+  <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/app.css">
+</head>
+<body id="app" class="container-fluid">
+{{#principal}}
+  <div>
+    <span>hi, {{name}}</span>
+    <a href="/create">create</a>
+    <a href="/">home</a>
+    <a href="/logout">logout</a>
+  </div>
+{{/principal}}
+{{^principal}}
+  <div>
+    <span>hi, Guest</span>
+    <a href="/login">login</a>
+  </div>
+{{/principal}}

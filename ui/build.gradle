@@ -22,6 +22,6 @@ task 'npm install'(type: Exec) {
 
 // task alias for idea run configurations
 task ui(dependsOn: ['npm run build'])
-task ci(dependsOn: ['npm test', 'npm run e2e', 'npm run lint', 'npm run webpack'])
+task 'ui-ci'(dependsOn: ['npm test', 'npm run e2e', 'npm run lint', 'npm run webpack'])
 
 //build.dependsOn ui

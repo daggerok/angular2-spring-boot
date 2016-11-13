@@ -18,7 +18,6 @@ public class Role implements Serializable {
 
     private static final long serialVersionUID = 12731884532344L;
 
-    @Id
-    String id;
+    @Id String id;
     String name;
 }

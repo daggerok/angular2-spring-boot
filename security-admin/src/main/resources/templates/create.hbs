@@ -1,0 +1,25 @@
+{{> commons/head}}
+
+<form action="/create" method="post" name="writeUser">
+  <label for="username">username:</label>
+  <input value="{{#username}}{{.}}{{/username}}"
+         id="username"
+         name="username"
+         type="text"
+         placeholder="enter username"/>
+  <label for="password">password:</label>
+  <input value="{{#password}}{{.}}{{/password}}"
+         id="password"
+         name="password"
+         type="password"
+         placeholder="enter password"/>
+  <label for="password">roles:</label>
+  <input value="{{#roles}}{{.}}{{/roles}}"
+         id="roles"
+         name="roles"
+         type="text"
+         placeholder="enter roles"/>
+  <button type="submit" class="btn btn-primary">create user</button>
+</form>
+
+{{> commons/tail}}

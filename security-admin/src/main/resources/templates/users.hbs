@@ -1,0 +1,25 @@
+{{> commons/head}}
+
+{{#users}}
+  <ul class="list-style-none">
+    {{#users}}
+      <li class="list-group-item">
+        <span>name: {{username}}</span>
+        {{#roles}}
+          <span class="list-style-none">
+            (
+            <span class="list-group-item-text">
+              {{name}}
+            </span>
+            )
+          </span>
+        {{/roles}}
+      </li>
+    {{/users}}
+  </ul>
+{{/users}}
+{{^users}}
+  <div class="text-muted">users wasn't found</div>
+{{/users}}
+
+{{> commons/tail}}

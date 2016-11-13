@@ -18,11 +18,9 @@ import static java.util.Objects.isNull;
         collectionResourceRel = "users") // _embedde.{entityName(s)}*/
 public interface UserRepository extends MongoRepository<User, String> {
 
-    PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
-
-    Optional<User> findById(@Param("id") final String id);
-
     Optional<User> findByUsername(@Param("username") final String username);
+
+    PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 
     default User encodePasswordAndSaveOrUpdate(final User user) {
 
@@ -40,7 +38,8 @@ public interface UserRepository extends MongoRepository<User, String> {
         val optionalUser = findByUsername(user.getUsername());
 
         if (optionalUser.isPresent()) {
-            return save(optionalUser.get().setPassword(encodedPassword));
+            return save(optionalUser.get()
+                    .setPassword(encodedPassword));
         }
 
         return save(user.setPassword(encodedPassword));

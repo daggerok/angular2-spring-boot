@@ -16,8 +16,9 @@ subprojects {
     ext['hibernate.version'] = '4.3.11.Final'
     ext {
       webjarsVersion = '0.32'
-      lombokVersion = '1.16.10'
       bootstrapVersion = '3.3.7-1'
+      guavaVersion = '20.0'
+      lombokVersion = '1.16.10'
       jaksonAnnotationsVersion = '2.8.4'
       springBootVersion = '1.4.2.RELEASE'
       springSecurityVersion = '4.2.0.RELEASE'

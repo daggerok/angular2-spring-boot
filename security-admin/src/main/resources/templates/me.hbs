@@ -1,0 +1,11 @@
+{{> commons/head}}
+
+{{#principal}}
+  {{.}}
+{{/principal}}
+{{^principal}}
+  <a href="/login">login</a>
+  <a href="/logout">logout</a>
+{{/principal}}
+
+{{> commons/tail}}
