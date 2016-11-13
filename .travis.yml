@@ -4,7 +4,7 @@ language: java
 jdk: oraclejdk8
 install: true
 env:
-  DOCKER_COMPOSE_VERSION: 1.8.1
+  DOCKER_COMPOSE_VERSION: 1.9.0-rc4
 before_install:
   - echo 'install docker-compose'
   - sudo rm /usr/local/bin/docker-compose
