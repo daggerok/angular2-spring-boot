@@ -1,0 +1,13 @@
+spring:
+  application.name: ui
+  cloud.stream.bindings.userOutputChannel:
+    destination: user
+    group: durable-user
+  cloud.stream.bindings.userInputChannel:
+    destination: user
+    group: durable-user
+  rabbitmq:
+    username: admin
+    password: admin
+#  mustache:
+#    prefix: classpath:/static

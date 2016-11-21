@@ -1,31 +1,47 @@
-# # http://localhost:15672
-rabbitmq:
-   image: rabbitmq:3-management
-   container_name: rabbitmq-admin
-   environment:
-     RABBITMQ_DEFAULT_USER: admin
-     RABBITMQ_DEFAULT_PASS: admin
-   ports:
-     - "5672:5672"
-     - "15672:15672"
-     - "25672:25672"
-
-mongo-express:
-  container_name: mongo-express
-  image: mongo-express
-  environment:
-    ME_CONFIG_OPTIONS_EDITORTHEME: ambiance
-    ME_CONFIG_SITE_BASEURL: /
-  ports:
-    - "8081:8081"
-  links:
-    - mongo
-
-mongo:
-  container_name: mongo
-  image: mongo
-  environment:
-    - MONGO_PORT_27017_TCP_ADDR=localhost
-    - MONGO_PORT_27017_TCP_PORT=27017
-  ports:
-    - "27017:27017"
+version: '2'
+services:
+  # http://0.0.0.0:15672 -> 8082
+  food-online-rabbitmq-admin:
+    image: rabbitmq:3-management
+    container_name: food-online-rabbitmq-admin
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+    ports:
+      - "5672:5672"
+      - "8082:15672"
+      - "25672:25672"
+    networks:
+      - food-online-backend
+  # http://0.0.0.0:8081
+  food-online-mongo-express:
+    container_name: food-online-mongo-express
+    image: mongo-express:0.31
+    environment:
+      ME_CONFIG_MONGODB_SERVER: food-online-mongo
+      ME_CONFIG_OPTIONS_EDITORTHEME: ambiance
+      ME_CONFIG_SITE_BASEURL: /
+    ports:
+      - "8081:8081"
+    links:
+      - food-online-mongo
+    depends_on:
+      - food-online-mongo
+    networks:
+      - food-online-backend
+  # mongo://localhost/test
+  food-online-mongo:
+    container_name: food-online-mongo
+    image: mongo:3.4
+    environment:
+      #- MONGO_PORT_27017_TCP_ADDR=localhost
+      - MONGO_PORT_27017_TCP_PORT=27017
+    ports:
+      - "27017:27017"
+    networks:
+      - food-online-backend
+networks:
+  food-online-backend:
+    driver: bridge
+  default:
+    driver: bridge

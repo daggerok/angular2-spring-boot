@@ -14,7 +14,6 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements Serializable {
 
-
     @Id String id;
     String username;
     String password;

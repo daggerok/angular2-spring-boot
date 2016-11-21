@@ -1,0 +1,36 @@
+dependencies {
+  compile 'org.springframework.boot:spring-boot-starter-web'
+}
+
+def workDir = new File("$project.projectDir/src/web")
+
+task 'npm install'(type: Exec) {
+  workingDir workDir
+  executable 'bash'
+  args '-c', 'npm i --no-optional'
+}
+
+[
+    // update
+    'npm outdated',
+    // test
+    'npm run e2e', 'npm run lint',
+    // build
+    'npm run webpack', 'npm run build',
+    // run
+    'npm start', 'npm run watch', 'npm run serve', 'npm stop',
+].each { npmCommand ->
+  tasks.create(name: npmCommand, type: Exec, dependsOn: 'npm install') {
+    workingDir workDir
+    executable 'bash'
+    args '-c', npmCommand
+  }
+}
+
+// task alias for idea run configurations
+task ui(dependsOn: ['npm run build'])
+task 'ui-ci'(dependsOn: ['npm run e2e', 'npm run lint', 'npm run webpack'])
+
+test.dependsOn 'ui-ci'
+build.dependsOn ui
+build.shouldRunAfter ui

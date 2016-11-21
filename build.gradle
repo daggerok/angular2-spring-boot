@@ -1,5 +1,9 @@
 buildscript {
-  repositories { mavenCentral() }
+  repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+  }
   dependencies { classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}" }
 }
 
@@ -7,17 +11,13 @@ plugins {
   id 'java'
   id 'idea'
   id 'eclipse'
-}
-
-jar {
-  baseName = 'spring-cloud-stream'
+  // gradle dependencyUpdates -Drevision=release
+  id 'com.github.ben-manes.versions' version '0.13.0'
+  id 'io.spring.dependency-management' version '0.6.1.RELEASE'
 }
 
 allprojects {
-  jar {
-    version = '0.0.1-SNAPSHOT'
-  }
-
+  jar { version = '0.0.1-SNAPSHOT' }
   sourceCompatibility = JavaVersion.VERSION_1_8
   targetCompatibility = JavaVersion.VERSION_1_8
 }
@@ -25,12 +25,17 @@ allprojects {
 subprojects {
   apply plugin: 'org.springframework.boot'
 
-  repositories { mavenCentral() }
+  repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+  }
 
   dependencies {
     compile 'org.springframework.cloud:spring-cloud-starter-stream-rabbit',
-            'org.springframework.boot:spring-boot-starter-actuator',
-            'org.projectlombok:lombok'
+            'org.springframework.boot:spring-boot-starter-actuator'//,
+//            'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
     runtime 'org.springframework.boot:spring-boot-devtools'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
   }
@@ -41,3 +46,5 @@ subprojects {
     }
   }
 }
+
+task wrapper(type: Wrapper) { gradleVersion = '3.2' }

@@ -1,9 +1,3 @@
-.gradlew*
-.gradle
-gradle/
-build/
-!gradle/wrapper/gradle-wrapper.jar
-
 ### STS ###
 .apt_generated
 .classpath
@@ -13,7 +7,6 @@ build/
 .springBeans
 
 ### IntelliJ IDEA ###
-.idea
 *.iws
 *.iml
 *.ipr
@@ -24,3 +17,21 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+### Project ###
+*/src/main/resources/static/
+.gradle
+build/
+
+### Ignore ###
+node_modules/
+gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+.idea/
+!.idea/compiler.xml
+!.idea/jsLibraryMappings.xml
+!.idea/misc.xml
+!.idea/modules.xml
+!.idea/vcs.xml
+!.idea/watcherTasks.xml
