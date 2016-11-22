@@ -3,8 +3,7 @@
 dev
 
 ```fish
-gradle bootRun
-gradle 'npm start'
+gradle --parallel bootRun 'npm start'
 ```
 
 
