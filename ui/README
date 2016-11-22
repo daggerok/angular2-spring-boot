@@ -21,10 +21,3 @@ generate angular 2 components using angular-cli:
 npm i -g angular-cli
 cd src/app
 ng g c my-component
-
-idea configuration:
-- choose use .editconfig settings
-- do not compile typescript files with idea
-
-if you have any problems with build on 'install node and npm' phase:
-rm -rf applications/cc/src/web/node applications/cc/src/web/node_modules applications/cc/src/web/npm.tar.gz
