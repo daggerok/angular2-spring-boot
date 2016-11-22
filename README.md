@@ -12,12 +12,10 @@ build
 
 ```fish
 gradle ui build
-gradle --parallel bootRun
 ```
 
 run
 
 ```fish
-gradle clean npmInstall npmTest npmBuild build
-bash build/libs/*.jar
+gradle --parallel bootRun
 ```
