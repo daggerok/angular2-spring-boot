@@ -1,15 +1,19 @@
+const proxy = () => ({
+  target: "http://localhost:8080",
+  changeOrign: false,
+  secure: false,
+});
+
 export default {
   port: 8000,
   inline: true,
   progress: true,
   stats: 'minimal',
   historyApiFallback: {
-    index: '/'
+    index: '/',
   },
   proxy: {
-    "/api": {
-      target: "http://localhost:8080",
-      secure: false
-    }
-  }
+    "/api": proxy(),
+    "/login": proxy(),
+  },
 };

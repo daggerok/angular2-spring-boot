@@ -7,10 +7,12 @@ import ExtractPlugin from 'extract-text-webpack-plugin';
 import htmlWebpackPluginConfig from './html.config.babel';
 import { ForkCheckerPlugin } from 'awesome-typescript-loader';
 
+import tslint from './tslint.babel';
+
 const extractCSS = new ExtractPlugin('[name].css', { allChunks: true });
 
 const exclude = /\/node_modules\//;
-const assets = /\.(raw|gif|png|jpg|jpeg|otf|eot|woff|woff2|ttf|svg|ico)$/;
+const assets = /\.(raw|gif|png|jpg|jpeg|otf|eot|woff|woff2|ttf|svg|ico)$/i;
 
 const resolve = (rel) => path.resolve(process.cwd(), rel);
 const resources = resolve('./src/resources');
@@ -29,23 +31,30 @@ export default {
     filename: '[name].js',
   },
   module: {
-    preLoaders: [{
-      include,
-      test: /\.js$/,
-      loader: 'source-map',
-    }],
+    preLoaders: [
+      {
+        include,
+        test: /\.ts$/i,
+        loader: 'tslint',
+      },
+      {
+        include,
+        test: /\.js$/i,
+        loader: 'source-map',
+      }
+    ],
     loaders: [
       {
-        test: /\.ts$/,
-        // loader: 'ts',
+        test: /\.ts$/i,
         loaders: [
           'awesome-typescript-loader',
-          'angular2-template-loader'
+          'angular2-template-loader',
+          'angular2-router-loader',
         ],
       },
       {
         include,
-        test: /\.js$/,
+        test: /\.js$/i,
         loader: 'babel',
         query: {
           presets: [
@@ -60,15 +69,15 @@ export default {
       {
         include,
         loader: 'json',
-        test: /\.json$/,
+        test: /\.json$/i,
       },
       {
         include,
         loader: 'raw',
-        test: /\.html$/,
+        test: /\.html$/i,
       },
       {
-        test: /\.css$/,
+        test: /\.css$/i,
         include: [
           resolve('./node_modules/angular'),
           resolve('./node_modules/bootstrap/dist'),
@@ -78,7 +87,7 @@ export default {
       },
       {
         include,
-        test: /\.styl$/,
+        test: /\.styl$/i,
         loader: extractCSS.extract('style', 'css!postcss!stylus?sourceMap'),
       },
       {
@@ -127,6 +136,7 @@ export default {
     autoprefixer,
     cssnano
   ],
+  tslint,
   node: {
     console: true,
     fs: 'empty',

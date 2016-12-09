@@ -1,11 +1,3 @@
-Customer Care
-
-development:
-
-mvn spring-boot:run # or run nabor-cc (shared) configuration
-
-+
-
 npm i
 npm start
 npm run dev

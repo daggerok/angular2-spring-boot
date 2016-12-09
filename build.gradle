@@ -8,20 +8,20 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    dependencies { classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE' }
+    dependencies { classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE' }
   }
 }
 
 plugins {
-  id 'io.spring.dependency-management' version '0.6.1.RELEASE'
-  // gradle dependencyUpdates -Drevision=release
-  id 'com.github.ben-manes.versions' version '0.13.0'
   id 'java'
   id 'idea'
   id 'eclipse'
+  // gradle dependencyUpdates -Drevision=release
+  id 'com.github.ben-manes.versions' version '0.13.0'
+  id 'io.spring.dependency-management' version '0.6.1.RELEASE'
 }
 
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 
 jar {
   baseName = 'angular2-spring-boot'
@@ -37,11 +37,11 @@ repositories {
 
 dependencies {
   compile 'org.springframework.boot:spring-boot-starter-security',
-          'org.springframework.security:spring-security-web:4.1.1.RELEASE',
+          'org.springframework.security:spring-security-web:4.2.0.RELEASE',
           'org.springframework.boot:spring-boot-starter-mustache',
           'org.springframework.boot:spring-boot-starter-actuator',
           'org.springframework.boot:spring-boot-devtools',
-          'org.projectlombok:lombok'
+          'org.projectlombok:lombok:1+'
 
   testCompile 'org.springframework.boot:spring-boot-starter-test'
 }

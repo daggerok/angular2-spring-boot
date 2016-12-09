@@ -4,6 +4,7 @@ export default {
   favicon: './src/assets/favicon.ico',
   minify: {
     collapseWhitespace: true,
+    removeComments: true,
     minifyCSS: true,
     minifyJS: true,
   },

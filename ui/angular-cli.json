@@ -1,7 +1,7 @@
 {
   "project": {
-    "version": "1.0.0-beta.19-3",
-    "name": "cc"
+    "version": "1.0.0-beta.22-1",
+    "name": "asb"
   },
   "apps": [
     {
@@ -21,11 +21,7 @@
         "styles.styl"
       ],
       "scripts": [],
-      "environments": {
-        "source": "environments/environment.ts",
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-      }
+      "environments": {}
     }
   ],
   "addons": [],
