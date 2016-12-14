@@ -1,8 +1,4 @@
 buildscript {
-  // https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-1.4-Release-Notes
-  // http://hibernate.org/search/documentation/migrate/5.0/
-  // https://github.com/hibernate/hibernate-orm/blob/5.0/migration-guide.adoc
-  ext['hibernate.version'] = '4.3.11.Final'
   repositories {
     jcenter()
     mavenCentral()
@@ -37,7 +33,7 @@ repositories {
 
 dependencies {
   compile 'org.springframework.boot:spring-boot-starter-security',
-          'org.springframework.security:spring-security-web:4.2.0.RELEASE',
+          'org.springframework.security:spring-security-web:4+',
           'org.springframework.boot:spring-boot-starter-mustache',
           'org.springframework.boot:spring-boot-starter-actuator',
           'org.springframework.boot:spring-boot-devtools',

@@ -13,10 +13,13 @@ before_install:
 language: java
 jdk: oraclejdk8
 script:
-  - gradle ui-ci build ui
+  - npm --prefix ui i
+  - npm --prefix ui test
+  - npm --prefix ui run lint
+  - npm --prefix ui run e2e
+  - gradle build ui
   - cat ui/*.log | true
 cache.directories:
-  - ui/node/
-  - ui/node_modules/
+  - .gradle/
   - $HOME/.gradle/
-  - $HOME/.m2/
+  - ui/node_modules/
