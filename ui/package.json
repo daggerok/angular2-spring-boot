@@ -8,15 +8,13 @@
     "ui:clean": "rimraf -rf '../src/main/resources/static'",
     "ui:build": "ng build --prod -o ../src/main/resources/static",
     "build": "npm-run-all ui:*",
-    "not-worked-proxy": "ng serve --proxy config/proxy.json",
+    "not-worked-yet-proxy": "ng serve --proxy config/proxy.json",
     "serve": "ng serve",
     "start": "ng build -w -o ../src/main/resources/static",
-    "lint": "tslint \"src/**/*.ts\"",
-    "watch": "ng test",
-    "test": "ng test --singleRun",
-    "testUi": "npm-run-all test e2e",
+    "lint": "tslint 'src/**/*.ts'",
+    "test": "npm run e2e",
     "pree2e": "webdriver-manager update",
-    "e2e": "protractor"
+    "e2e": "protractor --config protractor.js"
   },
   "private": true,
   "dependencies": {
