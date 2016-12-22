@@ -23,3 +23,14 @@ public class ErrorConfig {
         }
     }
 }
+
+/*
+@Configuration
+public class SpaFallbackConfig {
+
+    @Bean
+    public EmbeddedServletContainerCustomizer containerFallback() {
+        return container -> container.addErrorPages(new ErrorPage(NOT_FOUND, "/404"));
+    }
+}
+*/

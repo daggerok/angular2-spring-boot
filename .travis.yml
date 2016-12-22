@@ -3,8 +3,11 @@ dist: trusty
 language: java
 language: node_js
 node_js:
+  # prev
   - 5
+  # lts
   - 6
+  # latest
   - 7
 jdk: oraclejdk8
 install: true
@@ -43,11 +46,11 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 script:
-  - bash gradlew --parallel ci test
-  - bash gradlew --parallel ui build -x test
+  - gradle --parallel ci test
+  - gradle --parallel ui build -x test
 after_script:
   - killall -9 node
-  - bash gradlew --stop
+  - gradle --stop
 cache.directories:
   - ui/node_modules/
   - $HOME/.gradle/
