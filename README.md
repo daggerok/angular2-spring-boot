@@ -1,28 +1,22 @@
 angular2-spring-boot [![build](https://travis-ci.org/daggerok/angular2-spring-boot.svg?branch=master)](https://travis-ci.org/daggerok/angular2-spring-boot)
 ====================
 
+test
+
+```fish
+gradlew --parallel ci test
+```
+
 build
 
 ```fish
-gradle ui build bootRun
+gradlew --parallel ui build
 ```
 
+run
+
 ```fish
-gradle clean npmInstall npmTest npmBuild build
+gradlew bootRun
+# or
 bash build/libs/*.jar
-```
-
-backend development
-
-```fish
-gradle bootRun
-```
-
-ui development
-
-```fish
-cd ui/
-npm start
-npm run build
-npm run serve
 ```
