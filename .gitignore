@@ -10,9 +10,9 @@ classes/
 **/*.iml
 **/*.iws
 
+dist/
 node_modules/
-**/dist/
 src/main/resources/static/
 
 gradle/
-!gradle/wrapper/*
+!gradle/wrapper/*.*
