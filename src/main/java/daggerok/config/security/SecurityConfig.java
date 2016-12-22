@@ -40,12 +40,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf()
                 .disable()
             .authorizeRequests()
-                .antMatchers("/login*", "/vendors**", "/404").permitAll()
-                .antMatchers("/admin", "/admin/**").hasRole("ADMIN")
+                .antMatchers(
+                        "/favicon.ico",
+                        "/vendors/**",
+                        "/vendors.*",
+                        "/login*",
+                        "/vendors**",
+                        "/404").permitAll()
+                .mvcMatchers("/admin", "/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             .and()
                 .formLogin()
-                .loginPage("/login")
+                // // usi this only with custom login.html page
+                //.loginPage("/login")
                 .permitAll()
             .and()
                 .logout()

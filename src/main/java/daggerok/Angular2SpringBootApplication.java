@@ -14,6 +14,6 @@ public class Angular2SpringBootApplication {
     public static void main(String[] args) {
 
         SpringApplication.run(Angular2SpringBootApplication.class, args);
-        log.info("\nrest api: http://localhost:8080/api\nmgmt api: http://localhost:8080");
+        log.info("\napi: http://localhost:8080/api\nbase: http://localhost:8080");
     }
 }

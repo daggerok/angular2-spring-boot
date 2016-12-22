@@ -13,10 +13,10 @@ export const extractCSS = new ExtractPlugin('[name].css', { allChunks: true });
 export default {
   preLoaders: [
     isProdOrGhPages ? undefined : {
-      include,
-      test: /\.ts$/i,
-      loader: 'tslint-loader',
-    },
+        include,
+        test: /\.ts$/i,
+        loader: 'tslint-loader',
+      },
     {
       include,
       test: /\.js$/i,

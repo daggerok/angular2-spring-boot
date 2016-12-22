@@ -5,19 +5,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class Spa {
+public class IndexPage {
 
     /**
      * handle login, logout (success, error), access denied
      */
     @GetMapping({
             "/login",
-            "/login.html",
+//            "/login.html",
             "/login?error",
             "/login?logout",
             "/login?accessDenied", })
     public String login() {
-        return "login";
+        return "/login.html";
     }
 
     /**
@@ -29,9 +29,9 @@ public class Spa {
             "",
             "/",
             "/404",
-            "/index.html",
+//            "/index.html",
             "/some/custom/application/route", })
     public String index() {
-        return "index";
+        return "/index.html";
     }
 }
