@@ -1,14 +1,19 @@
 sudo: required
 dist: trusty
 language: java
+language: node_js
+node_js:
+  - 5
+  - 6
+  - 7
 jdk: oraclejdk8
 install: true
 env:
   SPRING_PROFILES_ACTIVE: default
   DOCKER_COMPOSE_VERSION: 1.9.0
 before_install:
-  # node
-  - nvm install 7
+  ## node
+  #- nvm install 7
   # chrome
   - export CHROME_BIN=/usr/bin/google-chrome
   - export DISPLAY=:99.0
@@ -23,26 +28,25 @@ before_install:
   - sdk selfupdate
   - touch "$HOME/.sdkman/etc/config"
   - sed -i -e 's/^sdkman_auto_answer=false$/sdkman_auto_answer=true/g' "$HOME/.sdkman/etc/config"
-#  - sdk use gradle < /dev/null
-#  - sdk install gradle < /dev/null
+  #- sdk use gradle < /dev/null
+  #- sdk install gradle < /dev/null
   - sdk use gradle
   - sdk install gradle
   - mkdir -p "$HOME/.sdkman/etc"
   - sdk use gradle
   - source "$HOME/.sdkman/bin/sdkman-init.sh"
-#  # docker
-#  - sudo rm /usr/local/bin/docker-compose
-#  - export DOCKER_COPOSE_URL=https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m`
-#  - echo using\ $DOCKER_COPOSE_URL
-#  - curl -L $DOCKER_COPOSE_URL > docker-compose
-#  - chmod +x docker-compose
-#  - sudo mv docker-compose /usr/local/bin
+  # docker
+  - sudo rm /usr/local/bin/docker-compose
+  - export DOCKER_COPOSE_URL=https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m`
+  - echo using\ $DOCKER_COPOSE_URL
+  - curl -L $DOCKER_COPOSE_URL > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
 script:
-  - bash gradlew ui build
+  - bash gradlew clean ui build
 after_script:
   - killall -9 node
   - bash gradlew --stop
-  - cat ui/npm-debug*.log | true
 cache.directories:
   - ui/node_modules/
   - $HOME/.gradle/
