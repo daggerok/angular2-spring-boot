@@ -20,7 +20,8 @@ npmInstall {
 npm_run_build.shouldRunAfter npm_t
 npm_t.shouldRunAfter npmInstall
 
-task ui(dependsOn: ['npm_t', 'npm_run_build'])
+task ui(dependsOn: ['npm_run_build'])
+task ci(dependsOn: ['npm_t'])
 
 /*
 

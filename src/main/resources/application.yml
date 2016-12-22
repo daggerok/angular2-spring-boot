@@ -1,6 +1,2 @@
-spring:
-  data:
-    rest:
-      base-path: /api
-management:
-  context-path: /admin
+spring.data.rest.base-path: /api
+management.context-path: /admin

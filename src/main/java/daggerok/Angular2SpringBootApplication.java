@@ -1,6 +1,7 @@
 package daggerok;
 
 import daggerok.config.RestRepositoryConfig;
+import daggerok.config.web.SpaFallbackConfig;
 import daggerok.domain.User;
 import daggerok.domain.UserRestRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +15,9 @@ import java.util.stream.Stream;
 
 @Slf4j
 @SpringBootApplication
-@Import(RestRepositoryConfig.class)
+@Import({
+        SpaFallbackConfig.class,
+        RestRepositoryConfig.class })
 public class Angular2SpringBootApplication {
 
     @Bean

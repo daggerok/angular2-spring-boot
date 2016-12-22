@@ -37,9 +37,12 @@ dependencies {
   testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 
+/*
+// turning on parallel builds
 def ui = tasks.findByPath(':ui:ui')
 build.dependsOn ui
 build.shouldRunAfter ui
+*/
 
 // bash build/libs/*.jar
 springBoot {

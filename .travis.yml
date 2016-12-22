@@ -43,7 +43,8 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 script:
-  - bash gradlew clean ui build
+  - bash gradlew --parallel ci test
+  - bash gradlew --parallel ui build
 after_script:
   - killall -9 node
   - bash gradlew --stop

@@ -8,9 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-/**
- * Created by mak on 9/8/16.
- */
 @Data
 @Entity
 @Accessors(chain = true)
