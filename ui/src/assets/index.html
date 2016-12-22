@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <base href="/">
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>angular2</title>
+</head>
+<body class="container-fluid">
+<app>
+  <style type="text/css">
+    /* position: center of the page */
+    .centered {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      /* bring your own prefixes */
+      transform: translate(-50%, -50%);
+    }
+
+    /* loading animation */
+    .ball {
+      background-color: white;
+      border: 6px solid darkgrey;
+      opacity: .9;
+      border-top: 3px solid white;
+      border-left: 3px solid white;
+      border-radius: 100px;
+      box-shadow: 0 0 75px grey;
+      width: 100px;
+      height: 100px;
+      margin: 0 auto;
+      -moz-animation: spin .7s infinite linear;
+      -webkit-animation: spin .7s infinite linear;
+    }
+
+    @-moz-keyframes spin {
+      0% {
+        -moz-transform: rotate(0deg);
+      }
+      100% {
+        -moz-transform: rotate(360deg);
+      }
+    }
+
+    @-moz-keyframes spinoff {
+      0% {
+        -moz-transform: rotate(0deg);
+      }
+      100% {
+        -moz-transform: rotate(-360deg);
+      }
+    }
+
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @-webkit-keyframes spinoff {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(-360deg);
+      }
+    }
+  </style>
+
+  <div class="container centered">
+    <div class="row vertical-center-row">
+      <div class="text-center col-xs-4 col-xs-offset-4">
+        <div class="ball"></div>
+      </div>
+    </div>
+  </div>
+</app>
+</body>
+</html>

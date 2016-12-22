@@ -1,39 +1,52 @@
 {
   "project": {
-    "version": "1.0.0-beta.11-webpack.8",
-    "name": "angular2-spring-boot-ui"
+    "version": "1.0.0-beta.24",
+    "name": "angular2-spring-boot"
   },
   "apps": [
     {
       "root": "src",
-      "outDir": "../src/main/resources/static",
-      "assets": "assets",
-      "index": "index.html",
+      "outDir": "dist",
+      "assets": [
+        "assets"
+      ],
+      "index": "assets/index.html",
       "main": "main.ts",
+      "module": "app/module.ts",
       "tsconfig": "tsconfig.json",
-      "prefix": "ng2-boot",
+      "prefix": "a2sb",
       "mobile": false,
       "styles": [
-        "styles.css"
+        "styles.styl"
       ],
       "scripts": [],
-      "environments": {
-        "source": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts",
-        "dev": "environments/environment.dev.ts"
-      }
+      "environments": {}
     }
   ],
   "addons": [],
   "packages": [],
   "e2e": {
     "protractor": {
-      "config": "./protractor.conf.js"
+      "config": "./config/protractor/conf.js"
     }
   },
+  "test": {
+    "karma": {}
+  },
   "defaults": {
-    "styleExt": "css",
+    "styleExt": "styl",
     "prefixInterfaces": false,
-    "lazyRoutePrefix": "+"
+    "inline": {
+      "style": true,
+      "template": false
+    },
+    "spec": {
+      "class": false,
+      "component": false,
+      "directive": false,
+      "module": false,
+      "pipe": false,
+      "service": false
+    }
   }
 }

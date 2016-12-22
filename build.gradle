@@ -4,7 +4,6 @@ buildscript {
     classpath "org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE"
   }
 }
-
 plugins {
   id 'java'
   id 'idea'
@@ -13,7 +12,7 @@ plugins {
 
 }
 
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 
 jar {
   baseName = 'angular2-spring-boot'
@@ -38,32 +37,15 @@ dependencies {
   testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 
-task ui(dependsOn: ['npmInstall', 'npmTest', 'npmBuild'])
-
-task npmInstall(type: Exec) {
-  workingDir './ui'
-  commandLine "npm", "i", "--no-optional"
-}
-
-task npmTest(type: Exec) {
-  workingDir './ui'
-  commandLine "npm", "run", "testUi"
-}
-
-task npmBuild(type: Exec) {
-  workingDir './ui'
-  commandLine "npm", "run", "build"
-}
-
+def ui = tasks.findByPath(':ui:ui')
+build.dependsOn ui
 build.shouldRunAfter ui
-npmBuild.shouldRunAfter npmTest
-npmTest.shouldRunAfter npmInstall
-
-task wrapper(type: Wrapper) {
-  gradleVersion = '3.0'
-}
 
 // bash build/libs/*.jar
 springBoot {
   executable = true
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '3.2.1'
 }

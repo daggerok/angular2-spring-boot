@@ -1,14 +1,14 @@
-import { UiPage } from './app.po';
+import { Angular2Page } from './app.po';
 
-describe('ui App', function() {
-  let page: UiPage;
+describe('app a2sb-home h3', function() {
+  let page: Angular2Page;
 
   beforeEach(() => {
-    page = new UiPage();
+    page = new Angular2Page();
   });
 
-  it('should display message saying app works', () => {
+  it('should display message saying "hi, badass!"', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getAppAngular2HomeH3Text()).toEqual('hi, badass!');
   });
 });

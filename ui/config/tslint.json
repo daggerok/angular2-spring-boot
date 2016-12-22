@@ -1,0 +1,161 @@
+{
+  "rulesDirectory": [
+    "../node_modules/tslint-eslint-rules/dist/rules",
+    "../node_modules/codelyzer"
+  ],
+  "jsRules": {
+    "class-name": true,
+    "comment-format": [
+      true,
+      "check-space"
+    ],
+    "indent": [
+      true,
+      "spaces"
+    ],
+    "no-duplicate-variable": true,
+    "no-eval": true,
+    "no-trailing-whitespace": true,
+    "no-unsafe-finally": true,
+    "no-var-keyword": true,
+    "one-line": [
+      true,
+      "check-open-brace",
+      "check-whitespace"
+    ],
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "semicolon": [
+      true,
+      "always",
+      "ignore-bound-class-methods"
+    ],
+    "triple-equals": [
+      true,
+      "allow-null-check"
+    ],
+    "variable-name": [
+      true,
+      "ban-keywords"
+    ],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-separator",
+      "check-type"
+    ]
+  },
+  "rules": {
+    "class-name": true,
+    "comment-format": [
+      true,
+      "check-space"
+    ],
+    "indent": [
+      true,
+      "spaces"
+    ],
+    "no-duplicate-variable": true,
+    "no-eval": true,
+    "no-internal-module": true,
+    "no-trailing-whitespace": true,
+    "no-unsafe-finally": true,
+    "no-var-keyword": true,
+    "one-line": [
+      true,
+      "check-open-brace",
+      "check-whitespace"
+    ],
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "semicolon": [
+      true,
+      "always",
+      "ignore-bound-class-methods"
+    ],
+    "triple-equals": [
+      true,
+      "allow-null-check"
+    ],
+    "typedef-whitespace": [
+      true,
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      }
+    ],
+    "variable-name": [
+      true,
+      "ban-keywords"
+    ],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-separator",
+      "check-type"
+    ]
+  },
+  "component-class-suffix": true,
+  "directive-class-suffix": true,
+  "directive-selector-name": [
+    true,
+    "camelCase"
+  ],
+  "component-selector-name": [
+    false,
+    "kebab-case"
+  ],
+  "directive-selector-type": [
+    true,
+    "attribute"
+  ],
+  "directive-selector-prefix": [
+    false,
+    "a2sb"
+  ],
+  "component-selector-prefix": [
+    false,
+    "a2sb"
+  ],
+  "directive-selector": [
+    true,
+    "attribute",
+    "a2sb",
+    "camelCase"
+  ],
+  "component-selector": [
+    true,
+    "element",
+    "a2sb",
+    "kebab-case"
+  ],
+  "pipe-naming": [
+    true,
+    "camelCase",
+    "a2sb"
+  ],
+  "no-input-rename": true,
+  "no-output-rename": true,
+  "use-pipe-transform-interface": true,
+  "use-input-property-decorator": true,
+  "use-output-property-decorator": true,
+  "use-host-property-decorator": true,
+  "no-attribute-parameter-decorator": true,
+  "no-forward-ref": true,
+  "use-life-cycle-interface": true,
+  "import-destructuring-spacing": true,
+  "templates-use-public": true,
+  "no-access-missing-member": true,
+  "invoke-injectable": true
+}

@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "mode": "modules",
+    "sourceMap": true,
+    "theme": "default",
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "stripInternal": true,
+    "removeComments": false,
+    "moduleResolution": "node",
+    "preserveConstEnums": true,
+    "ignoreCompilerErrors": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "suppressExcessPropertyErrors": true,
+    "suppressImplicitAnyIndexErrors": true
+  },
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "exclude": [
+    "node_modules/*",
+    "**/*-aot.ts"
+  ]
+}

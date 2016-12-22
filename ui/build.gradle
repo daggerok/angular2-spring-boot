@@ -1,0 +1,51 @@
+plugins {
+  id 'com.moowork.node' version '1.0.0'
+}
+
+npmInstall {
+  args = ['--no-optional']
+}
+
+[
+    // build
+    npm_run_webpack, npm_run_build,
+    // test
+    npm_run_lint, npm_run_e2e, npm_t,
+    // run
+    npm_start, npm_run_serve, npm_run_watch, npm_stop,
+].each { npm_command ->
+  npm_command.dependsOn npmInstall
+}
+
+npm_run_build.shouldRunAfter npm_t
+npm_t.shouldRunAfter npmInstall
+
+task ui(dependsOn: ['npm_t', 'npm_run_build'])
+
+/*
+
+def workDir = new File('./ui/')
+
+task npmInstall(type: Exec) {
+  workingDir workDir
+  executable 'bash'
+  args '-c', 'npm i --no-optional'
+}
+
+task npmTest(type: Exec) {
+  workingDir workDir
+  executable 'bash'
+  args '-c', 'npm test'
+}
+
+task npmBuild(type: Exec) {
+  workingDir workDir
+  executable 'bash'
+  args '-c', 'npm run build'
+
+}
+
+build.shouldRunAfter ui
+npmBuild.shouldRunAfter npmTest
+npmTest.shouldRunAfter npmInstall
+*/
