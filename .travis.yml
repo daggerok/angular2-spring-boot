@@ -44,7 +44,7 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 script:
   - bash gradlew --parallel ci test
-  - bash gradlew --parallel ui build
+  - bash gradlew --parallel ui build -x test
 after_script:
   - killall -9 node
   - bash gradlew --stop
