@@ -1,4 +1,4 @@
 {
   "port": 8080,
-  "static": "../../target/classes/static"
+  "static": "./dist"
 }

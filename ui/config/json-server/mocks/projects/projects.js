@@ -7,7 +7,7 @@ export const projects = [{
   "lastAuditDate": "2015-05-07",
   "_links": {
     "self": {
-      "href": "http://localhost:8086/api/projects/1"
+      "href": "http://localhost:8080/api/projects/1"
     }
   }
 }, {
@@ -19,7 +19,7 @@ export const projects = [{
   "lastAuditDate": "2015-04-15",
   "_links": {
     "self": {
-      "href": "http://localhost:8086/api/projects/2"
+      "href": "http://localhost:8080/api/projects/2"
     }
   }
 }];

@@ -1,14 +1,8 @@
 package daggerok.web;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-import javax.servlet.ServletContext;
 
 @Controller
 public class Spa {
@@ -34,6 +28,7 @@ public class Spa {
             path = {
             "",
             "/",
+            "/404",
             "/index.html",
             "/some/custom/application/route", })
     public String index() {

@@ -1,11 +1,6 @@
 buildscript {
-  repositories {
-    jcenter()
-    mavenCentral()
-  }
-  dependencies {
-    dependencies { classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE' }
-  }
+  repositories { jcenter() }
+  dependencies { classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE' }
 }
 
 plugins {
@@ -26,18 +21,20 @@ jar {
 
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
-repositories {
-  jcenter()
-  mavenCentral()
-}
+repositories { jcenter() }
 
 dependencies {
   compile 'org.springframework.boot:spring-boot-starter-security',
-          'org.springframework.security:spring-security-web:4+',
-          'org.springframework.boot:spring-boot-starter-mustache',
-          'org.springframework.boot:spring-boot-starter-actuator',
-          'org.springframework.boot:spring-boot-devtools',
-          'org.projectlombok:lombok:1+'
+      'org.springframework.security:spring-security-web:4+',
+      'org.springframework.boot:spring-boot-starter-data-rest',
+      'org.springframework.boot:spring-boot-starter-data-jpa',
+      'org.springframework.boot:spring-boot-starter-actuator',
+      'org.springframework.boot:spring-boot-starter-mustache',
+      'org.springframework.boot:spring-boot-starter-hateoas',
+      'org.springframework.boot:spring-boot-devtools',
+      'org.projectlombok:lombok:1+'
+
+  runtime 'com.h2database:h2'
 
   testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
@@ -48,4 +45,13 @@ springBoot {
   mainClass = 'daggerok.Angular2SpringBootApplication'
 }
 
-build.shouldRunAfter ':ui:ui'
+task wrapper(type: Wrapper) {
+  gradleVersion = '3.2.1'
+}
+
+/*
+// turning on parallel builds
+def ui = tasks.findByPath(':ui:ui')
+build.dependsOn ui
+build.shouldRunAfter ui
+*/

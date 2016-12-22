@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
+import './home.component.styl';
+
 @Component({
-  selector: 'cc-home',
+  selector: 'a2sb-home',
   templateUrl: './home.component.html',
-  styles: []
 })
 export class HomeComponent implements OnInit {
-  name = 'cc';
+  name = 'badass';
   constructor() {}
   public ngOnInit() {}
 }

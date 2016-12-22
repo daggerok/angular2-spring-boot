@@ -1,14 +1,10 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
-import {
-  HttpModule,
-  CookieXSRFStrategy,
-  XSRFStrategy
-} from '@angular/http';
+import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
+import { AppRoutes } from './app.routes';
 import { AppComponent }  from './app.component';
-import { AppRoutes }     from './app.routes';
 import { HomeComponent } from './home/home.component';
 
 @NgModule({
@@ -22,9 +18,8 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     HomeComponent,
   ],
-  bootstrap: [AppComponent],
-  providers: [
-    { provide: XSRFStrategy, useValue: new CookieXSRFStrategy('XSRF-TOKEN', 'X-XSRF-TOKEN') }
+  bootstrap: [
+    AppComponent,
   ],
 })
 export class AppModule {}

@@ -10,6 +10,5 @@ export const AppRoutes = RouterModule.forRoot([
   {
     path: '**',
     redirectTo: '/',
-    pathMatch: 'full',
-  }
+  },
 ]);

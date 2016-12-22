@@ -33,7 +33,8 @@ exports.config = {
   /**
    * direct connect is nom supported by phantomjs, only chrome / firefox
    */
-  directConnect: false,
+  directConnect: true,
+  chromeOnly: true,
 
   baseUrl: 'http://localhost:8000/',
 

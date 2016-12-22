@@ -1,47 +1,36 @@
-/*
- |--------------------------------------------------------------------------
- | Browser-sync config file
- |--------------------------------------------------------------------------
- |
- | For up-to-date information about the options:
- |   http://www.browsersync.io/docs/options/
- |
- | There are more options than you see here, these are just the ones that are
- | set internally. See the website for more info.
- */
-
 // all requests to /api/** => will redirect on http://localhost:8080/api/**
 const httpProxyMiddleware = require('http-proxy-middleware');
 const localhost8080proxyApi = httpProxyMiddleware('/api', {
   target: 'http://localhost:8080',
   changeOrigin: true, // for vhosted sites, changes host header to match to target's host
-  logLevel: 'debug',
+  logLevel: 'debug'
 });
-
 // fallback for react-routes
 const historyApiFallback = require('connect-history-api-fallback');
+const staticDir = './dist';
+const publicPath = '/';
 
 module.exports = {
   server: {
     always: 'index.html',
-    baseDir: '../src/main/resources/static',
-    // see ./webpack/webpack-dev-server.config.babel.js
+    baseDir: staticDir,
+    // see devServer config
     middleware: [
       // proxy
       localhost8080proxyApi,
       // historyApiFallback
       historyApiFallback({
-        index: '/'
-      })
+        index: publicPath
+      }),
     ],
   },
   files: [
-    '../../target/classes/static/index.html',
-    '../../target/classes/static/**/*.*'
+    './dist/index.html',
+    './dist/**/*.*',
   ],
-  startPath: '/',
+  startPath: publicPath,
   serveStatic: [
-    '../../target/classes/static'
+    staticDir,
   ],
 
   /**

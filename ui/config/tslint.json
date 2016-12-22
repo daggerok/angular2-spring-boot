@@ -1,5 +1,6 @@
 {
   "rulesDirectory": [
+    "../node_modules/tslint-eslint-rules/dist/rules",
     "../node_modules/codelyzer"
   ],
   "jsRules": {
@@ -28,7 +29,8 @@
     ],
     "semicolon": [
       true,
-      "always"
+      "always",
+      "ignore-bound-class-methods"
     ],
     "triple-equals": [
       true,
@@ -74,7 +76,8 @@
     ],
     "semicolon": [
       true,
-      "always"
+      "always",
+      "ignore-bound-class-methods"
     ],
     "triple-equals": [
       true,
@@ -119,28 +122,28 @@
   ],
   "directive-selector-prefix": [
     false,
-    "asb"
+    "a2sb"
   ],
   "component-selector-prefix": [
     false,
-    "asb"
+    "a2sb"
   ],
   "directive-selector": [
     true,
     "attribute",
-    "asb",
+    "a2sb",
     "camelCase"
   ],
   "component-selector": [
     true,
     "element",
-    "asb",
+    "a2sb",
     "kebab-case"
   ],
   "pipe-naming": [
     true,
     "camelCase",
-    "asb"
+    "a2sb"
   ],
   "no-input-rename": true,
   "no-output-rename": true,

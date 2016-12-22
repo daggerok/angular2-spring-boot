@@ -1,14 +1,14 @@
-import { CcPage } from './app.po';
+import { Angular2Page } from './app.po';
 
-describe('app cc-home h3', function() {
-  let page: CcPage;
+describe('app a2sb-home h3', function() {
+  let page: Angular2Page;
 
   beforeEach(() => {
-    page = new CcPage();
+    page = new Angular2Page();
   });
 
-  it('should display message saying "hi, cc!"', () => {
+  it('should display message saying "hi, badass!"', () => {
     page.navigateTo();
-    expect(page.getAppCcHomeH3Text()).toEqual('hi, cc!');
+    expect(page.getAppAngular2HomeH3Text()).toEqual('hi, badass!');
   });
 });

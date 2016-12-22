@@ -1,3 +1,5 @@
+angular2/.gitignore-e
+
 /_test-output/
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
@@ -6,9 +8,6 @@
 /tmp
 
 # dependencies
-/etc
-/node
-npm.tar.gz
 /node_modules
 /bower_components
 
@@ -29,12 +28,11 @@ npm-debug.log*
 /typings
 
 # compile putput
-/e2e/*.js
-/e2e/*.map
-/src/*.js
-/src/*.map
+/ui/e2e/*.js
+/ui/e2e/*.map
+/ui/src/*.js
+/ui/src/*.map
 
 #System Files
 .DS_Store
 Thumbs.db
-

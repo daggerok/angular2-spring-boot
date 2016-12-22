@@ -1,11 +1,11 @@
 import { browser, element, by } from 'protractor';
 
-export class CcPage {
+export class Angular2Page {
   navigateTo() {
     return browser.get('/');
   }
 
-  getAppCcHomeH3Text() {
-    return element(by.css('app cc-home h3')).getText();
+  getAppAngular2HomeH3Text() {
+    return element(by.css('app a2sb-home h3')).getText();
   }
 }
