@@ -3,8 +3,6 @@ dist: trusty
 language: java
 language: node_js
 node_js:
-  # prev
-  - 5
   # lts
   - 6
   # latest
@@ -46,8 +44,8 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 script:
-  - gradle --parallel ci test
   - gradle --parallel ui build -x test
+  - gradle --parallel ci test
 after_script:
   - killall -9 node
   - gradle --stop
