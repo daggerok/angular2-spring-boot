@@ -1,2 +1,2 @@
-spring.profiles.include: 'users-credentials,mustache'
+spring.profiles.include: 'users-credentials,mustache,oauth,h2'
 management.context-path: /admin

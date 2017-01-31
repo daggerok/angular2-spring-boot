@@ -4,19 +4,19 @@
 test
 
 ```fish
-gradlew --parallel ci test
+gradle --parallel ci test
 ```
 
 build
 
 ```fish
-gradlew --parallel ui build
+gradle --parallel ui build
 ```
 
 run
 
 ```fish
-gradlew bootRun
+gradle bootRun
 # or
 bash build/libs/*.jar
 ```
