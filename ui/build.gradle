@@ -1,5 +1,6 @@
 plugins {
-  id 'com.moowork.node' version '1.0.0'
+  id 'java'
+  id 'com.moowork.node' version '1.1.0'
 }
 
 npmInstall {
@@ -20,33 +21,14 @@ npmInstall {
 npm_run_build.shouldRunAfter npm_t
 npm_t.shouldRunAfter npmInstall
 
-task ui(dependsOn: ['npm_run_build'])
-task ci(dependsOn: ['npm_t'])
-
-/*
-
-def workDir = new File('./ui/')
-
-task npmInstall(type: Exec) {
-  workingDir workDir
-  executable 'bash'
-  args '-c', 'npm i --no-optional'
+assemble {
+  dependsOn npm_run_build
 }
 
-task npmTest(type: Exec) {
-  workingDir workDir
-  executable 'bash'
-  args '-c', 'npm test'
+test {
+  dependsOn npm_t
 }
 
-task npmBuild(type: Exec) {
-  workingDir workDir
-  executable 'bash'
-  args '-c', 'npm run build'
-
+clean {
+  delete './node_modules'
 }
-
-build.shouldRunAfter ui
-npmBuild.shouldRunAfter npmTest
-npmTest.shouldRunAfter npmInstall
-*/

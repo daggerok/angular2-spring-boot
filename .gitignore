@@ -1,3 +1,7 @@
+gradle/
+!gradle/wrapper/*.*
+!gralew*
+
 out/
 build/
 target/
@@ -13,6 +17,3 @@ classes/
 dist/
 node_modules/
 src/main/resources/static/
-
-gradle/
-!gradle/wrapper/*.*

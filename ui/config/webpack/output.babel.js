@@ -8,4 +8,6 @@ export default {
   path: staticDir,
   filename: '[name].js',
   sourceMapFilename: '[file].map',
+  chunkFilename: '[id].chunk.js',
+  jsonpFunction: 'w'
 };

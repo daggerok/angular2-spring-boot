@@ -1,18 +1,12 @@
-buildscript {
-  repositories { jcenter() }
-  dependencies {
-    classpath "org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE"
-  }
-}
 plugins {
   id 'java'
   id 'idea'
+  id 'eclipse'
   // gradle dependencyUpdates -Drevision=release
   id 'com.github.ben-manes.versions' version '0.13.0'
-
+  id 'org.springframework.boot' version '1.5.1.RELEASE'
+  id 'io.spring.dependency-management' version '1.0.0.RC2'
 }
-
-apply plugin: 'org.springframework.boot'
 
 jar {
   baseName = 'angular2-spring-boot'
@@ -28,7 +22,7 @@ dependencies {
           'org.springframework.boot:spring-boot-starter-data-jpa',
           'org.springframework.boot:spring-boot-starter-actuator',
           'org.springframework.boot:spring-boot-starter-mustache',
-          'org.springframework.boot:spring-boot-starter-hateoas',
+          'org.springframework.boot:spring-boot-starter-web',
           'org.springframework.boot:spring-boot-devtools',
           'org.projectlombok:lombok:1+'
 
@@ -37,18 +31,20 @@ dependencies {
   testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 
-/*
-// turning on parallel builds
-def ui = tasks.findByPath(':ui:ui')
-build.dependsOn ui
-build.shouldRunAfter ui
-*/
+// build execulable jar: `bash build/libs/*.jar`
+springBoot {
+  executable = true
+  mainClass = 'daggerok.Angular2SpringBootApplication'
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '3.2.1'
+}
 
 // bash build/libs/*.jar
 springBoot {
   executable = true
 }
 
-task wrapper(type: Wrapper) {
-  gradleVersion = '3.2.1'
-}
+test.shouldRunAfter ':ui:test'
+assemble.shouldRunAfter ':ui:assemble'

@@ -13,7 +13,7 @@ import { extractCSS } from './module.babel';
 import { isProdOrGhPages } from './env.babel';
 import commonsChunkPluginVendorConfig from './plugin/commons-chunk-plugin/vendors.config.babel';
 import compressionWebpackPluginConfig from './plugin/compression-webpack-plugin.config.babel';
-import definePluginConfig from './plugin/provide-plugin.config.babel';
+import definePluginConfig from './plugin/define-plugin.config.babel';
 import htmlWebpackPluginConfig from './plugin/html-webpack-plugin.config.babel';
 import providePluginConfig from './plugin/provide-plugin.config.babel';
 import uglifyJsPluginConfig from './plugin/uglify-js-plugin.config.babel';
@@ -26,21 +26,21 @@ const {
   DedupePlugin,
 } = optimize;
 
-const prodPlugins = !isProdOrGhPages ? [] : [
-    new DedupePlugin(),
-    new AggressiveMergingPlugin(),
-    new UglifyJsPlugin(uglifyJsPluginConfig),
-    new CompressionWebpackPlugin(compressionWebpackPluginConfig),
-    new ScriptExtHtmlWebpackPlugin({ defaultAttribute: 'defer' }),
-    new CommonsChunkPlugin(commonsChunkPluginVendorConfig(vendors, '[name].js')),
-];
+const prodPlugins = isProdOrGhPages ? [
+  new DedupePlugin(),
+  new AggressiveMergingPlugin(),
+  new UglifyJsPlugin(uglifyJsPluginConfig(isProdOrGhPages)),
+  new CompressionWebpackPlugin(compressionWebpackPluginConfig),
+  new ScriptExtHtmlWebpackPlugin({ defaultAttribute: 'defer' }),
+  new CommonsChunkPlugin(commonsChunkPluginVendorConfig(vendors, '[name].js')),
+] : [];
 
 export default [
   extractCSS,
   new OccurenceOrderPlugin(true),
   new ProvidePlugin(providePluginConfig()),
   isProdOrGhPages ? undefined : new NoErrorsPlugin(),
-  new DefinePlugin(definePluginConfig()),
+  new DefinePlugin(definePluginConfig(isProdOrGhPages)),
   new HtmlWebpackPlugin(htmlWebpackPluginConfig(isProdOrGhPages)),
   ...prodPlugins,
 ].filter(plugin => !!plugin);

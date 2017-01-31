@@ -2,7 +2,7 @@ import { publicPath } from './output.babel';
 
 const proxy = () => ({
   target: "http://localhost:8080",
-  secure: true,
+  secure: false,
 });
 
 const devServer = {

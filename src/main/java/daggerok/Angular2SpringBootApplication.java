@@ -23,15 +23,17 @@ public class Angular2SpringBootApplication {
     @Bean
     public CommandLineRunner testData(UserRestRepository repository) {
 
+        if (repository.count() > 0) {
+            return args -> log.info("users already added...");
+        }
+
         return args -> Stream.of("max", "fax")
                 .map(s -> new User().setUsername(s))
-                .forEach(repository::save);
+                .map(repository::save)
+                .forEach(u -> log.info("saved user {}", u));
     }
 
     public static void main(String[] args) {
-
         SpringApplication.run(Angular2SpringBootApplication.class, args);
-
-        log.info("\nrest api: http://localhost:8080/api\nmgmt api: http://localhost:8080/admin");
     }
 }
