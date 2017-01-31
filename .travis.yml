@@ -42,8 +42,9 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 script:
-  - bash gradlew --parallel test
-  - bash gradlew --parallel assemble
+  - gradle --parallel test
+  - gradle wrapper
+  - bash gradlew assemble
 after_script:
   - killall -9 node
   - bash gradlew --stop
