@@ -1,5 +1,3 @@
-export const vendors = 'vendors';
-
 export default {
   vendors: [
     './src/polyfills.ts',

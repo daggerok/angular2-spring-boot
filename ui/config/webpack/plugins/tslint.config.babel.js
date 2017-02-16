@@ -1,6 +1,12 @@
-import { isProduction } from './env.babel';
+/**
+ * Static analysis linter for TypeScript advanced options configuration
+ * Description: An extensible linter for the TypeScript language.
+ *
+ * See: https://github.com/wbuchwalter/tslint-loader
+ */
 
-export default {
+export default env => ({
+  // resourcePath: pathTo('src'),
 
   // tslint errors are displayed by default as warnings
   // set emitErrors to true to display them as errors
@@ -9,7 +15,7 @@ export default {
   // tslint does not interrupt the compilation by default
   // if you want any file with tslint errors to fail
   // set failOnHint to true
-  failOnHint: isProduction,
+  failOnHint: env !== 'development',
 
   // can specify a custom config file relative to current directory
   // 'tslint-custom.json'
@@ -38,4 +44,4 @@ export default {
     // Useful for some report formats.
     footer: '</checkstyle>',
   },
-};
+});

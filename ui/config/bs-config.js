@@ -1,12 +1,13 @@
-// all requests to /api/** => will redirect on http://localhost:8080/api/**
+// proxy: all requests to /api/** => will redirect on http://localhost:8080/api/**
 const httpProxyMiddleware = require('http-proxy-middleware');
 const proxy = httpProxyMiddleware('/api', {
   target: 'http://localhost:8080',
   changeOrigin: true, // for vhosted sites, changes host header to match to target's host
   logLevel: 'debug'
 });
+
 // fallback for react-routes
-const historyApiFallback = require('connect-history-api-fallback');
+const connectHistoryApiFallback = require('connect-history-api-fallback');
 const staticDir = '../src/main/resources/static';
 const publicPath = '/';
 
@@ -18,15 +19,15 @@ module.exports = {
     middleware: [
       // proxy
       proxy,
-      // historyApiFallback
-      historyApiFallback({
+      // history API fallback
+      connectHistoryApiFallback({
         index: publicPath
       }),
     ],
   },
   files: [
-    './dist/index.html',
-    './dist/**/*.*',
+    '../src/main/resources/static/index.html',
+    '../src/main/resources/static/**/*.*',
   ],
   startPath: publicPath,
   serveStatic: [

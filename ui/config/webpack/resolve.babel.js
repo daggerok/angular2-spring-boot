@@ -1,4 +1,14 @@
+import { pathTo } from './utils.babel';
+
 export default {
-  extensions: ['', '.ts', '.js', '.jsx'],
-  modulesDirectories: ['node_modules']
+  modules: [
+    pathTo('./src'),
+    'node_modules',
+  ],
+  extensions: [
+    '.ts',
+    '.js',
+    '.css',
+    '.styl',
+  ],
 };

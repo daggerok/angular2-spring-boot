@@ -1,29 +1,33 @@
-import { resolve } from 'path';
-import ExtractPlugin from 'extract-text-webpack-plugin';
-import { isProdOrGhPages } from './env.babel';
+import ExtractTextWebpackPlugin from 'extract-text-webpack-plugin';
+import {
+  pathTo,
+  minimize,
+} from './utils.babel';
 
-const exclude = /\/node_modules\//;
-const assets = /\.(raw|gif|png|jpg|jpeg|otf|eot|woff|woff2|ttf|svg|ico)$/i;
-const pathTo = (rel) => resolve(process.cwd(), rel);
-const resources = pathTo('./src/assets');
 const include = pathTo('./src');
+const resources = pathTo('./src/assets');
 
-export const extractCSS = new ExtractPlugin('[name].css', { allChunks: true });
+export const exclude = /\/(node_modules|bower_components)\//;
+const assets = /\.(raw|gif|png|jpg|jpeg|otf|eot|woff|woff2|ttf|svg|ico)$/i;
 
-export default {
-  preLoaders: [
-    isProdOrGhPages ? undefined : {
-      include,
-      test: /\.ts$/i,
-      loader: 'tslint-loader',
-    },
+const cssLoader = env => ExtractTextWebpackPlugin.extract({
+  fallback: 'style-loader',
+  use: `css-loader?importLoader=1${minimize(env)}!postcss-loader?sourceMap=inline`,
+});
+
+const stylusLoader = env => ExtractTextWebpackPlugin.extract({
+  fallback: 'style-loader',
+  use: `css-loader?importLoader=2${minimize(env)}!postcss-loader?sourceMap=inline!stylus-loader`,
+});
+
+export default env => ({
+  rules: [
     {
       include,
-      test: /\.js$/i,
-      loader: 'source-map-loader',
+      enforce: 'pre',
+      test: /\.ts$/i,
+      loader: 'tslint-loader'
     },
-  ].filter(preLoader => !!preLoader),
-  loaders: [
     {
       test: /\.ts$/i,
       loaders: [
@@ -35,46 +39,54 @@ export default {
     {
       include,
       test: /\.js$/i,
+      loader: 'source-map-loader',
+    },
+    {
+      include,
+      test: /\.js$/i,
       loader: 'babel-loader',
-      query: {
+      options: {
         presets: [
+          // [ 'es2015', { modules: 'commonjs' } ], // can be false or amd, umd, systemjs, commonjs
+          [ 'es2015', { modules: false } ],
           'stage-0',
-          'es2015',
         ],
         plugins: [
           'add-module-exports',
-        ]
+          'syntax-dynamic-import',
+          'transform-class-properties',
+        ],
       }
     },
     {
       include,
-      loader: 'raw-loader',
       test: /\.html$/i,
+      loader: 'raw-loader',
     },
     {
       test: /\.css$/i,
-      include: [
-        pathTo('./node_modules/angular'),
-        pathTo('./node_modules/bootswatch'),
-        pathTo('./node_modules/bootstrap'),
-        include,
-      ],
-      loader: extractCSS.extract('style-loader', `css-loader?importLoader=1${isProdOrGhPages ? '' : '&sourceMap'}`, 'postcss-loader'),
+      use: cssLoader(env),
     },
     {
-      include,
       test: /\.styl$/i,
-      loader: extractCSS.extract('style-loader', `css-loader!postcss-loader!stylus-loader${isProdOrGhPages ? '' : '?sourceMap'}`),
+      include: [
+        include,
+        pathTo('./node_modules/angular/'),
+        pathTo('./node_modules/bootstrap/'),
+        pathTo('./node_modules/bootswatch/'),
+        pathTo('./node_modules/normalize.css/'),
+      ],
+      use: stylusLoader(env),
     },
     {
+      test: assets,
       include: exclude,
       loader: 'file-loader?name=vendors/[1]&regExp=node_modules/(.*)',
-      test: assets,
     },
     {
+      test: assets,
       include: resources,
       loader: 'file-loader?name=resources/[1]&regExp=src/assets/(.*)',
-      test: assets,
     },
     {
       exclude: [
@@ -89,4 +101,4 @@ export default {
     /.+zone\.js\/dist\/.+/,
     /.+angular2\/bundles\/.+/,
   ]
-};
+});

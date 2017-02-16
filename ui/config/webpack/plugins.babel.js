@@ -1,46 +1,52 @@
+import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin';
+import ExtractTextWebpackPlugin from 'extract-text-webpack-plugin';
+import CompressionWebpackPlugin from 'compression-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import {
-  NoErrorsPlugin,
+  ContextReplacementPlugin,
+  NoEmitOnErrorsPlugin,
+  LoaderOptionsPlugin,
   ProvidePlugin,
   DefinePlugin,
   optimize,
 } from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin';
-import CompressionWebpackPlugin from 'compression-webpack-plugin';
 
-import { vendors } from './entry.babel';
-import { extractCSS } from './module.babel';
-import { isProdOrGhPages } from './env.babel';
-import commonsChunkPluginVendorConfig from './plugin/commons-chunk-plugin/vendors.config.babel';
-import compressionWebpackPluginConfig from './plugin/compression-webpack-plugin.config.babel';
-import definePluginConfig from './plugin/define-plugin.config.babel';
-import htmlWebpackPluginConfig from './plugin/html-webpack-plugin.config.babel';
-import providePluginConfig from './plugin/provide-plugin.config.babel';
-import uglifyJsPluginConfig from './plugin/uglify-js-plugin.config.babel';
+import { BaseHrefWebpackPlugin } from 'base-href-webpack-plugin';
+import baseHrefWebpackPluginConfig from './plugins/base-href-webpack-plugin.config.babel';
+import uglifyJsPluginConfig from './plugins/uglify-js-plugin';
+import compressionWebpackPluginConfig from './plugins/compression-webpack-plugin.config.babel';
+import commonsChunkPluginConfig from './plugins/commons-chunk-plugin.config.babel';
+import scriptExtHtmlWebpackPluginConfig from './plugins/script-ext-html-webpack-plugin.config.babel';
+import extractTextWebpackPluginConfig from './plugins/extract-text-webpack-plugin.config.babel';
+import providePluginConfig from './plugins/provide-plugin.config.babel';
+import definePluginConfig from './plugins/define-plugin.config.babel';
+import htmlWebpackPluginConfig from './plugins/html-webpack-plugin.config.babel';
+import loaderOptionsPluginConfig from './plugins/loader-options-plugin.config.babel';
+
+import { pathTo } from './utils.babel';
 
 const {
   AggressiveMergingPlugin,
-  OccurenceOrderPlugin,
   CommonsChunkPlugin,
   UglifyJsPlugin,
-  DedupePlugin,
 } = optimize;
 
-const prodPlugins = isProdOrGhPages ? [
-  new DedupePlugin(),
-  new AggressiveMergingPlugin(),
-  new UglifyJsPlugin(uglifyJsPluginConfig(isProdOrGhPages)),
-  new CompressionWebpackPlugin(compressionWebpackPluginConfig),
-  new ScriptExtHtmlWebpackPlugin({ defaultAttribute: 'defer' }),
-  new CommonsChunkPlugin(commonsChunkPluginVendorConfig(vendors, '[name].js')),
-] : [];
-
-export default [
-  extractCSS,
-  new OccurenceOrderPlugin(true),
-  new ProvidePlugin(providePluginConfig()),
-  isProdOrGhPages ? undefined : new NoErrorsPlugin(),
-  new DefinePlugin(definePluginConfig(isProdOrGhPages)),
-  new HtmlWebpackPlugin(htmlWebpackPluginConfig(isProdOrGhPages)),
-  ...prodPlugins,
+export default env => [
+  // Fixes Angular 2 error ?
+  new ContextReplacementPlugin(
+    /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+    pathTo('./src')
+  ),
+  new ProvidePlugin(providePluginConfig),
+  new DefinePlugin(definePluginConfig(env)),
+  new CommonsChunkPlugin(commonsChunkPluginConfig),
+  new HtmlWebpackPlugin(htmlWebpackPluginConfig(env)),
+  new LoaderOptionsPlugin(loaderOptionsPluginConfig(env)),
+  new BaseHrefWebpackPlugin(baseHrefWebpackPluginConfig(env)),
+  new ExtractTextWebpackPlugin(extractTextWebpackPluginConfig(env)),
+  env === 'development' ? new NoEmitOnErrorsPlugin() : undefined,
+  env !== 'development' ? new AggressiveMergingPlugin() : undefined,
+  env !== 'development' ? new UglifyJsPlugin(uglifyJsPluginConfig) : undefined,
+  env !== 'development' ? new CompressionWebpackPlugin(compressionWebpackPluginConfig) : undefined,
+  env !== 'development' ? new ScriptExtHtmlWebpackPlugin(scriptExtHtmlWebpackPluginConfig) : undefined,
 ].filter(plugin => !!plugin);

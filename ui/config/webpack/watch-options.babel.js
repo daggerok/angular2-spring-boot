@@ -1,6 +1,8 @@
+import { exclude } from './module.babel';
+
 export default {
   ignored: [
-    /node_modules/,
+    exclude,
     '**/*.js'
   ],
   poll: 1000,
