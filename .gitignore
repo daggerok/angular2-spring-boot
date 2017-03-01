@@ -1,18 +1,23 @@
 gradle/
 !gradle/wrapper/*.*
 !gralew*
+.gradle/
+
+**/.idea
+!*.idea/runConfigurations
+!*.idea/jsLibraryMappings.xml
+!*.idea/misc.xml
+!*.idea/vcs.xml
+**/*.log*
+**/*.ipr
+**/*.iml
+**/*.iws
 
 out/
 build/
 target/
 classes/
 
-.gradle/
-**/.idea
-**/*.log*
-**/*.ipr
-**/*.iml
-**/*.iws
 
 dist/
 node_modules/

@@ -6,8 +6,8 @@ bower_components/
 npm-debug.log*
 node_modules/
 .DS_Store
-dist/
-*.tmp
-*.log
+#dist/
+.tmp
+.log
 temp
 tmp

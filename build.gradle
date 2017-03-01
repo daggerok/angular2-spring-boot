@@ -23,7 +23,6 @@ dependencies {
           'org.springframework.boot:spring-boot-starter-data-jpa',
           'org.springframework.boot:spring-boot-starter-actuator',
           'org.springframework.boot:spring-boot-starter-mustache',
-          'org.springframework.boot:spring-boot-starter-web',
           'org.springframework.boot:spring-boot-devtools',
           'org.projectlombok:lombok:1+'
 
@@ -35,7 +34,7 @@ dependencies {
 // build execulable jar: `bash build/libs/*.jar`
 springBoot {
   executable = true
-  mainClass = 'daggerok.Angular2SpringBootApplication'
+  mainClass = 'daggerok.AngularJsSpringBootApplication'
 }
 
 task wrapper(type: Wrapper) {

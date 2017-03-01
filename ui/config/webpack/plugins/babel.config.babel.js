@@ -4,7 +4,6 @@ export default {
     'stage-0',
   ],
   plugins: [
-    'transform-class-properties',
     'syntax-dynamic-import',
     'add-module-exports',
   ],

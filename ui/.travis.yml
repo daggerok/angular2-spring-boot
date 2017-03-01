@@ -1,18 +1,12 @@
 sudo: required
 dist: trusty
-language: java
-jdk: oraclejdk8
+language: node_js
+node_js:
+  - 5
+  - 6
+  - 7
 install: true
-env:
-  DOCKER_COMPOSE_VERSION: 1.9.0
 before_install:
-  - sudo rm /usr/local/bin/docker-compose
-  - export DOCKER_COPOSE_URL=https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m`
-  - echo using\ $DOCKER_COPOSE_URL
-  - curl -L $DOCKER_COPOSE_URL > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
-  - nvm install 7
   - export CHROME_BIN=/usr/bin/google-chrome
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
@@ -22,17 +16,13 @@ before_install:
   - sudo dpkg -i google-chrome*.deb
 before_script:
   - npm i
-  - bash ./server/gradlew -b ./server/build.gradle clean build -x test &
-  - docker-compose up -d
-  - bash ./server/gradlew -b ./server/build.gradle build bootRun &
+  - npm update
 script:
-  - npm run build
-  - npm run e2e
+  - npm t
   - npm run lint
-  - npm run webpack
-  - cat npm-debug.log | true
+  - npm run build
+  - npm run ghpages
 after_script:
-  - npm run down
-#  - bash ./server/gradlew -b ./server/build.gradle --stop
-#  - docker-compose kill
+  - cat *.log | true
+  - npm outdated
 cache.directories: node_modules/

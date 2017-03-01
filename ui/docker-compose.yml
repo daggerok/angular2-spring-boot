@@ -1,38 +1,14 @@
 version: '2'
 services:
-  angular-2-nginx:
-    container_name: angular-2-nginx
-    image: nginx:1.11.7
+  angularjs-nginx:
+    container_name: angularjs-nginx
+    image: nginx:latest
     volumes:
-      - ./dist:/usr/share/nginx/html
+      - ./dist:/usr/share/nginx/html:ro
     ports:
       - "80:80"
     networks:
-      - backend-network
-  angular-2-mongo:
-    container_name: angular-2-mongo
-    hostname: angular-2-mongo
-    image: mongo:3.4.0
-    environment:
-      MONGO_PORT_27017_TCP_PORT: 27017
-    ports:
-      - "27017:27017"
-    networks:
-      - backend-network
-  #https://github.com/mongo-express/mongo-express-docker
-  angular-2-mongo-express:
-    container_name: angular-2-mongo-express
-    image: mongo-express:0.32.0
-    ports:
-      - "8081:8081"
-    links:
-      - angular-2-mongo
-    environment:
-      ME_CONFIG_MONGODB_SERVER: angular-2-mongo
-      ME_CONFIG_OPTIONS_EDITORTHEME: ambiance
-      ME_CONFIG_SITE_BASEURL: /
-    networks:
-      - backend-network
+      - angularjs-network
 networks:
-  backend-network:
+  angularjs-network:
     driver: bridge

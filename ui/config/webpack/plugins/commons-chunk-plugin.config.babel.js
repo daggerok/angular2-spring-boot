@@ -1,4 +1,4 @@
-import { suffix } from '../output.babel';
+import { suffix } from '../output.config.babel';
 
 export default {
   name: 'vendors',
