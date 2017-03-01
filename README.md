@@ -20,3 +20,10 @@ gradle bootRun
 # or
 bash build/libs/*.jar
 ```
+
+update npm versions
+
+```bash
+npm i -g npm-check-updates
+ncu -u
+```

@@ -2,6 +2,7 @@ import ExtractTextWebpackPlugin from 'extract-text-webpack-plugin';
 import {
   pathTo,
   minimize,
+  publicPath,
 } from './utils.babel';
 
 const include = pathTo('./src');
@@ -12,11 +13,13 @@ const assets = /\.(raw|gif|png|jpg|jpeg|otf|eot|woff|woff2|ttf|svg|ico)$/i;
 
 const cssLoader = env => ExtractTextWebpackPlugin.extract({
   fallback: 'style-loader',
+  publicPath: publicPath(env),
   use: `css-loader?importLoader=1${minimize(env)}!postcss-loader?sourceMap=inline`,
 });
 
 const stylusLoader = env => ExtractTextWebpackPlugin.extract({
   fallback: 'style-loader',
+  publicPath: publicPath(env),
   use: `css-loader?importLoader=2${minimize(env)}!postcss-loader?sourceMap=inline!stylus-loader`,
 });
 
@@ -29,8 +32,16 @@ export default env => ({
       loader: 'tslint-loader'
     },
     {
+      include,
+      enforce: 'pre',
       test: /\.ts$/i,
-      loaders: [
+      loader: 'source-map-loader'
+    },
+    {
+      test: /\.ts$/i,
+      loaders: env !== 'development' ? [
+        '@ngtools/webpack',
+      ] : [
         'awesome-typescript-loader',
         'angular2-template-loader',
         'angular2-router-loader',
@@ -39,16 +50,11 @@ export default env => ({
     {
       include,
       test: /\.js$/i,
-      loader: 'source-map-loader',
-    },
-    {
-      include,
-      test: /\.js$/i,
       loader: 'babel-loader',
       options: {
         presets: [
           // [ 'es2015', { modules: 'commonjs' } ], // can be false or amd, umd, systemjs, commonjs
-          [ 'es2015', { modules: false } ],
+          [ 'es2015', { modules: false, }, ], // can be false or amd, umd, systemjs, commonjs
           'stage-0',
         ],
         plugins: [

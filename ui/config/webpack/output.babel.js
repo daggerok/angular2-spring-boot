@@ -15,3 +15,4 @@ export default env => ({
   chunkFilename: `[id].chunk.js?${suffix}`,
   jsonpFunction: 'w',
 });
+
