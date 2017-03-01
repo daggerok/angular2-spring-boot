@@ -13,7 +13,8 @@ jar {
   version = '0.0.1'
 }
 
-sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories { jcenter() }
 
@@ -38,7 +39,7 @@ springBoot {
 }
 
 task wrapper(type: Wrapper) {
-  gradleVersion = '3.2.1'
+  gradleVersion = '3.4'
 }
 
 // bash build/libs/*.jar
